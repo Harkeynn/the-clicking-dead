@@ -9,11 +9,12 @@ class Increment extends Component {
     }
   }
 
+  //Updates number of zombies on button click
   handleIncrement = () => {
-    const newValue = this.state.zombies + 1
     this.setState({
-      zombies: newValue
+      zombies: this.state.zombies + 1
     })
+    this.props.handleZombieIncrement(this.state.zombies)
   }
 
   render() {
@@ -25,7 +26,7 @@ class Increment extends Component {
               <span className="card-title">Zombies</span>
               <p>{this.state.zombies}</p>
             </div>
-            <div class="card-action">
+            <div className="card-action">
               <button className="btn" onClick={this.handleIncrement}>Moar zombies</button>
             </div>
           </div>
