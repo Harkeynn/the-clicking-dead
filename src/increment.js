@@ -2,19 +2,19 @@ import React, { Component } from 'react'
 
 class Increment extends Component {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      zombies: 0
+      
     }
   }
 
   //Updates number of zombies on button click
   handleIncrement = () => {
     this.setState({
-      zombies: this.state.zombies + 1
+      zombies: this.props.zombies + 1
     })
-    this.props.handleZombieIncrement(this.state.zombies)
+    this.props.handleZombieIncrement()
   }
 
   render() {
@@ -23,8 +23,11 @@ class Increment extends Component {
         <div className="col s12">
           <div className="card">
             <div className="card-content">
-              <span className="card-title">Zombies</span>
-              <p>{this.state.zombies}</p>
+              <div className="card-title">
+                Zombies
+                <span className="right">ZPS : {this.props.zps}</span>
+              </div>
+              <p>{this.props.zombies}</p>
             </div>
             <div className="card-action">
               <button className="btn" onClick={this.handleIncrement}>Moar zombies</button>

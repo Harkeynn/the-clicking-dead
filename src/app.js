@@ -13,9 +13,8 @@ class App extends Component {
     }
   }
 
-
-  //Updates app.zombies when clicking on the <Incrmement /> button
-  handleZombIncr = (numOfZombies) => {
+  //Updates zombies when clicking on the <Incremement /> button
+  handleZombIncr = () => {
     this.setState({
       zombies: this.state.zombies + 1
     })
@@ -31,8 +30,9 @@ class App extends Component {
   }
 
   //Adds the value of the auto zombiefier bought to the total of zombie/sec
-  handleAutoClicker = (clickValue) => {
+  handleAutoClicker = (clickValue, price) => {
     this.setState({
+      zombies: this.state.zombies - price,
       autoClickTotal: this.state.autoClickTotal + parseFloat(clickValue)
     })
     if (this.state.autoClickTotal === 0) {
@@ -45,16 +45,12 @@ class App extends Component {
     }
   }
 
-  //Updates app.zombies and increment.zombies with the total of zombies/sec every seconds
+  //Adds the total of zombies/sec to zombies every seconds
   autoClick() {
     return setInterval(() => {
       this.setState({
-        zombies: Math.round((this.incr.state.zombies + parseFloat(this.state.autoClickTotal))*100)/100
+        zombies: Math.round((this.state.zombies + parseFloat(this.state.autoClickTotal))*100)/100
       })
-      this.incr.setState({
-        zombies: Math.round((this.incr.state.zombies + parseFloat(this.state.autoClickTotal))*100)/100
-      })
-      console.log(this.incr.state.zombies + " ; " + this.state.zombies)
     }, 1000)
   }
 
@@ -64,20 +60,23 @@ class App extends Component {
         <h1>The Clicking Dead</h1>
         <Increment 
           handleZombieIncrement={this.handleZombIncr}
-          ref={(increment) => this.incr = increment}
-        />
-        <Autoclicker
-          isActive={this.activator(1)}
-          title="Title"
-          description="Description"
-          clickValue="0.5"
-          handleAutoClick={this.handleAutoClicker}
+          zombies={this.state.zombies}
+          zps={this.state.autoClickTotal}
         />
         <Autoclicker
           isActive={this.activator(10)}
           title="Title"
           description="Description"
-          clickValue="2.3"
+          clickValue="0.5"
+          price="10"
+          handleAutoClick={this.handleAutoClicker}
+        />
+        <Autoclicker
+          isActive={this.activator(100)}
+          title="Title"
+          description="Description"
+          clickValue="1"
+          price="100"
           handleAutoClick={this.handleAutoClicker}
         />
       </div>

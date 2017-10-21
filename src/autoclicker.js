@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 
 class Autoclicker extends Component{
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       number: 0,
     }
@@ -14,7 +14,7 @@ class Autoclicker extends Component{
     this.setState({
       number: this.state.number + 1
     })
-    this.props.handleAutoClick(this.props.clickValue)
+    this.props.handleAutoClick(this.props.clickValue, this.props.price)
   }
 
   render() {
@@ -22,7 +22,10 @@ class Autoclicker extends Component{
       <div className="container">
         <div className="card">
           <div className="card-content">
-            <span className="card-title">{this.props.title}</span>
+            <div className="card-title">
+              {this.props.title}
+              <span className="right">{this.props.price}</span>
+            </div>
             <span className="right">x{this.state.number}</span>
             <p>{this.props.description}</p>
           </div>
