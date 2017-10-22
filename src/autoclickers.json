@@ -1,0 +1,36 @@
+{
+  "autoclicker1": {
+    "title": "Titre",
+    "description": "Description",
+    "price": "10",
+    "clickValue": "0.1",
+    "upgrades": {
+      "upgrade1": {
+        "title": "Titre",
+        "upgradeValue": "2",
+        "upgradeType": "x",
+        "description": "Description"
+      }
+    }
+  },
+  "autoclicker2": {
+    "title": "Titre",
+    "description": "Description",
+    "price": "100",
+    "clickValue": "1",
+    "upgrades":{
+      "upgrade1": {
+        "title": "Titre",
+        "upgradeValue": "5",
+        "upgradeType": "+",
+        "description": "Description"
+      },
+      "upgrade2": {
+        "title": "Titre",
+        "upgradeValue": "2.5",
+        "upgradeType": "+",
+        "description": "Description"
+      }
+    }
+  }
+}
