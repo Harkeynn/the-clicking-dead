@@ -8,14 +8,36 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      zombies: 0,
+      zombies: 675467541675167516751675171672152,
       autoClickTotal: 0,
     }
   }
 
+  
+
+  componentWillMount(){
+    numeral.register('locale','fr',{
+      delimiters: {
+          thousands: ' ',
+          decimal: ','
+      },
+      abbreviations: {
+        thousand: ' K',
+        million: ' M',
+        billion: ' B',
+        trillion: ' T',
+        quadrillion: ' Quad',
+        quintillion: ' Quin',
+        sextillion: ' Sext',
+        Septillion: 'Sept'
+      }
+    })
+    numeral.locale('fr')
+  }
+
   //Sets the page title on initialisation
   componentDidMount() {
-    document.title = numeral(this.state.zombies).format('0.00e+0') + " zombies - The Clicking Dead"
+    document.title = numeral(this.state.zombies).format('0,0.[000] a') + " zombies - The Clicking Dead"
   }
 
   //Updates zombies and page title when clicking on the <Incremement /> button
@@ -25,7 +47,7 @@ class App extends Component {
         zombies: this.state.zombies + 1
       },
       function() {
-        document.title = numeral(this.state.zombies).format('0.00e+0') + " zombies - The Clicking Dead"
+        document.title = numeral(this.state.zombies).format('0,0.[000]a') + " zombies - The Clicking Dead"
       }
     )
   }
