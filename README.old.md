@@ -31,64 +31,31 @@ Win / Loose
 Choix de faction
 
 ## Achievements :
-* First Bite (first human infected)
-* One for all (first country totally infected)
-* A zombie to rule them all / United Earth (All humans infected)
-* French Baguette (65M people infected)
-* Zombrexit (All europe infected)
-* I’ve seen enough Hentai to know where this is going / Tentacle Madness (All Asia infected)
-* American lover / Fast Food / Morbid Obesity (All the USA infected)
-* No more hunger (All Africa infected)
-* Where teh spooderz at? / Arachnophobia / Welcome to nopeland ! (All of Australia infected)
-* Imbibed flesh (All Russia infected)
-* Click and Furious (10 clicks in one second)
-* Sir, do you know how fast you were clicking ? (100 clicks in one second)
-* 1337 h4x0r (1000 clicks in one second)
-* Karma is a bitch (Human are taking over your zombies)
-* Evolution is a lie (Upgrade your zombies for the first time)
-* All hail the new gods (Fully upgrade your zombies)
-* The game, you just lost it / All your base are belong to us (Lose against the humans)
-* U n00b / GG WP (Lose on the first continent)
-* Grandfather’s call (Go to space)
+* First Bite
+* One for all
+* A zombie to rule them all / United Earth
+* French Baguette
+* Zombrexit
+* I’ve seen enough Hentai to know where this is going / Tentacle Madness
+* American lover / Fast Food / Morbid Obesity
+* No more hunger
+* Where teh spooderz at? / Arachnophobia / Welcome to nopeland !
+* Imbibed flesh
+* Click and Furious
+* Sir, do you know how fast you were clicking ?
+* 1337 h4x0r
+* Karma is a bitch
+* Evolution is a lie
+* All hail the new gods
+* The game, you just lost it / All your base are belong to us
+* U n00b / GG WP
+* Grandfather’s call
 
 ### Shadow achievments : 
-Veggie (Win without eating anybody)
-LGBTQ+ (Infect the non-binary person)
-I have all the genders I need now (Take an Apache helicopter to fly over another country)
-Best username ever (create a profile with a username like xX_foobar_Xx)
+Veggie
+LGBTQ+
+I have all the genders I need now
+Best username ever
 
-### Gestion de comptes utilisateurs : 
-Oui
-
-### Accès à la base de données régulier ?
-	Tous les clics ?
-	Toutes les 10 itérations ?
-
-### Classement : 
-Oui
-
-## Amélioration des zombies : 
-???
-Détection ? (début décrémentation)
-Résistance
-Vitesse de contamination
-
-## Technos : 
-### Front-end : 
-Html5
-CSS3 (SASS) Framework ? (MaterializeCSS / Bootstrap)
-ReactJs
-Javascript
-
-### Back-End
-Node.js
-MySql => Antoine
-
-## Design :
-Photoshop
-Illustrator
-
-## Gestion de Projet :
-Git
-Trello
-Google Drive
+##Usage :
+`npm install`
