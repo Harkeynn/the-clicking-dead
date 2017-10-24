@@ -57,5 +57,5 @@ LGBTQ+
 I have all the genders I need now
 Best username ever
 
-##Usage :
+## Usage :
 `npm install`
