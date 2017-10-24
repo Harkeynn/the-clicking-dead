@@ -25,10 +25,10 @@ Il sera possible au joueur d'acheter des améliorations de zombie.
 Choisir sa faction ! Multijoueur Zombie contre Humain ! (on se calme sur ça par contre)
 
 ## Features :
-Achievements
-Leaderboard 
-Win / Loose
-Choix de faction
+* Achievements
+* Leaderboard 
+* Win / Loose
+* Choix de faction
 
 ## Achievements :
 * First Bite
@@ -52,19 +52,25 @@ Choix de faction
 * Grandfather’s call
 
 ### Shadow achievments : 
-Veggie
-LGBTQ+
-I have all the genders I need now
-Best username ever
+* Veggie
+* LGBTQ+
+* I have all the genders I need now
+* Best username ever
 
 ## Usage :
 `npm install`
 
 ### Credits :
-BONNEQUESTION Valentin
 BOR Pierre
+
 COMBES Antoine
+
 DAUVERNE Marie
+
 DUVIVIERS Alexandre
+
 LEGOFF Duncan
+
 PLANCHAMP Pauline
+
+VIGUIER Valentin
