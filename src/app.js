@@ -1,43 +1,50 @@
 import React, { Component } from 'react'
 import Increment from './increment'
 import Autoclicker from './autoclicker'
-import numeral from 'numeral'
 
 class App extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      zombies: 675467541675167516751675171672152,
+      zombies: 0,
       autoClickTotal: 0,
     }
   }
 
-  
-
-  componentWillMount(){
-    numeral.register('locale','fr',{
-      delimiters: {
-          thousands: ' ',
-          decimal: ','
-      },
-      abbreviations: {
-        thousand: ' K',
-        million: ' M',
-        billion: ' B',
-        trillion: ' T',
-        quadrillion: ' Quad',
-        quintillion: ' Quin',
-        sextillion: ' Sext',
-        Septillion: 'Sept'
-      }
-    })
-    numeral.locale('fr')
+  //Method used to format big numbers
+  format(number) {
+    switch (true) {
+      case (number >= Math.pow(10, 33)):
+        return Math.floor(number / Math.pow(10, 30)) / 1000 + ' Dec'
+      case (number >= Math.pow(10, 30)):
+        return Math.floor(number / Math.pow(10, 27)) / 1000 + ' Non'
+      case (number >= Math.pow(10, 27)):
+        return Math.floor(number / Math.pow(10, 24)) / 1000 + ' Oct'
+      case (number >= Math.pow(10, 24)):
+        return Math.floor(number / Math.pow(10, 21)) / 1000 + ' Sept'
+      case (number >= Math.pow(10, 21)):
+        return Math.floor(number / Math.pow(10, 18)) / 1000 + ' Sext'
+      case (number >= Math.pow(10, 18)):
+        return Math.floor(number / Math.pow(10, 15)) / 1000 + ' Quin'
+      case (number >= Math.pow(10, 15)):
+        return Math.floor(number / Math.pow(10, 12)) / 1000 + ' Quad'
+      case (number >= Math.pow(10, 12)):
+        return Math.floor(number / Math.pow(10, 9)) / 1000 + ' T'
+      case (number >= Math.pow(10, 9)):
+        return Math.floor(number / Math.pow(10, 6)) / 1000 + ' B'
+      case (number >= Math.pow(10, 6)):
+        return Math.floor(number / Math.pow(10, 3)) / 1000 + ' M'
+      case (number >= Math.pow(10, 3)):
+        return Math.floor(number) / 1000 + ' K'
+      default:
+        return number
+    }
   }
 
   //Sets the page title on initialisation
   componentDidMount() {
-    document.title = numeral(this.state.zombies).format('0,0.[000] a') + " zombies - The Clicking Dead"
+    document.title = this.format(this.state.zombies) + " zombies - The Clicking Dead"
   }
 
   //Updates zombies and page title when clicking on the <Incremement /> button
@@ -46,8 +53,8 @@ class App extends Component {
       {
         zombies: this.state.zombies + 1
       },
-      function() {
-        document.title = numeral(this.state.zombies).format('0,0.[000]a') + " zombies - The Clicking Dead"
+      function () {
+        document.title = this.format(this.state.zombies) + " zombies - The Clicking Dead"
       }
     )
   }
@@ -81,7 +88,7 @@ class App extends Component {
   autoClick() {
     return setInterval(() => {
       this.setState({
-        zombies: Math.round((this.state.zombies + parseFloat(this.state.autoClickTotal))*100)/100
+        zombies: Math.round((this.state.zombies + parseFloat(this.state.autoClickTotal)) * 100) / 100
       })
       document.title = this.state.zombies + " zombies - The Clicking Dead"
     }, 1000)
@@ -91,22 +98,22 @@ class App extends Component {
     return (
       <div className="container">
         <h1>The Clicking Dead</h1>
-        <Increment 
+        <Increment
           handleZombieIncrement={this.handleZombIncr}
-          zombies={this.state.zombies}
-          zps={this.state.autoClickTotal}
+          zombies={this.format(this.state.zombies)}
+          zps={this.format(this.state.autoClickTotal)}
         />
         <Autoclicker
           isActive={this.activator(10)}
           handleAutoClick={this.handleAutoClicker}
           autoclicker="autoclicker1"
-          zps={this.state.zps}
+          zps={this.format(this.state.zps)}
         />
         <Autoclicker
           isActive={this.activator(100)}
           handleAutoClick={this.handleAutoClicker}
           autoclicker="autoclicker2"
-          zps={this.state.zps}
+          zps={this.format(this.state.zps)}
         />
       </div>
     )

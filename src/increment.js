@@ -1,7 +1,4 @@
 import React, { Component } from 'react'
-import numeral from 'numeral'
-
-
 
 class Increment extends Component {
 
@@ -28,9 +25,9 @@ class Increment extends Component {
             <div className="card-content">
               <div className="card-title">
                 Zombies
-                <span className="right">ZPS : {numeral(this.props.zps).format('0,0.[000] a').toUpperCase()}</span>
+                <span className="right">ZPS : {this.props.zps}</span>
               </div>
-              <p>{numeral(this.props.zombies).format('0,0.[000]a').toUpperCase()}</p>
+              <p>{this.props.zombies}</p>
             </div>
             <div className="card-action">
               <button className="btn" onClick={this.handleIncrement}>Moar zombies</button>
