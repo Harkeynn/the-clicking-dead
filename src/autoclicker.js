@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Upgrade from './upgrade'
 import JSONAutoclickers from './autoclickers.json'
+import {format} from './numbers'
 
 class Autoclicker extends Component {
 
@@ -12,12 +13,25 @@ class Autoclicker extends Component {
     }
   }
 
+  incrementPrice(price){
+    return Math.round(price*Math.pow(1.15,this.state.number))
+  }
+
   //Updates the number of this auto zombiefier and sends the value to add to the total of zombie/sec to app
   handleBuy = () => {
     this.setState({
       number: this.state.number + 1
     })
-    this.props.handleAutoClick(JSONAutoclickers[this.props.autoclicker]["clickValue"], JSONAutoclickers[this.props.autoclicker]["price"])
+    this.props.handleAutoClick(JSONAutoclickers[this.props.autoclicker]["clickValue"], this.incrementPrice(JSONAutoclickers[this.props.autoclicker]["price"]))
+  }
+  
+  //Activates <Autoclicker />'s button when trigger is reached
+  activator(trigger) {
+    if (this.props.zombies >= trigger) {
+      return true
+    } else {
+      return false
+    }
   }
 
   render() {
@@ -28,13 +42,13 @@ class Autoclicker extends Component {
           <div className="card-content">
             <div className="card-title activator">
               {target["title"]}
-              <span className="right">{target["price"]}</span>
+              <span className="right">{format(this.incrementPrice(target["price"]))}</span>
             </div>
             <span className="right">x{this.state.number}</span>
             <p>{target["description"]}</p>
           </div>
           <div className="card-action">
-            <button className={this.props.isActive ? "btn" : "btn disabled"} onClick={this.handleBuy}>Buy</button>
+            <button className={this.activator(this.incrementPrice(target["price"])) ? "btn" : "btn disabled"} onClick={this.handleBuy}>Buy</button>
           </div>
           <div className="card-reveal">
             <span className="card-title">{target["title"]}</span>
