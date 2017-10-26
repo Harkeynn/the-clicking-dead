@@ -43,7 +43,7 @@ class Profile extends Component {
   render() {
     return (
         <div id="modal">
-            <button data-target="modal1" class="btn modal-trigger" onClick={this.openModal}>Profile</button>
+            <button data-target="modal1" className="btn modal-trigger" onClick={this.openModal}>Profile</button>
             <Modal
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}
@@ -52,7 +52,7 @@ class Profile extends Component {
             >
                 <h4>{this.state.username}</h4>
                 <p>This is your awesome profile !</p>
-                <button class="btn modal-trigger" onClick={this.closeModal}>close</button>
+                <button className="btn modal-trigger" onClick={this.closeModal}>close</button>
             </Modal>
         </div>
     )

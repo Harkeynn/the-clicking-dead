@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import Increment from './increment'
 import Autoclicker from './autoclicker'
-import {format} from './numbers'
-import Profile from './profile'
 import Login from './login'
+import Profile from './profile'
+import JSONAutoclickers from './autoclickers.json'
+import { format } from './numbers'
 
 class App extends Component {
 
@@ -13,11 +14,12 @@ class App extends Component {
       zombies: 0,
       autoClickTotal: 0,
     }
+
   }
 
   //Sets the page title on initialisation
   componentDidMount() {
-    document.title = format(this.state.zombies) + " zombies - The Clicking Dead"
+    document.title = format(Math.floor(this.state.zombies)) + " zombies - The Clicking Dead"
   }
 
   //Updates zombies and page title when clicking on the <Incremement /> button
@@ -27,7 +29,7 @@ class App extends Component {
         zombies: this.state.zombies + 1
       },
       function () {
-        document.title = format(this.state.zombies) + " zombies - The Clicking Dead"
+        document.title = format(Math.floor(this.state.zombies)) + " zombies - The Clicking Dead"
       }
     )
   }
@@ -56,8 +58,13 @@ class App extends Component {
       this.setState({
         zombies: Math.round((this.state.zombies + parseFloat(this.state.autoClickTotal)) * 100) / 100
       })
-      document.title = format(this.state.zombies) + " zombies - The Clicking Dead"
+      document.title = format(Math.floor(this.state.zombies)) + " zombies - The Clicking Dead"
     }, 1000)
+  }
+
+  handleUpgrade = (value, type) => {
+    console.log(value, type)
+    
   }
 
   render() {
@@ -68,21 +75,20 @@ class App extends Component {
         <Profile/>
         <Increment
           handleZombieIncrement={this.handleZombIncr}
-          zombies={format(this.state.zombies)}
+          zombies={format(Math.floor(this.state.zombies))}
           zps={format(this.state.autoClickTotal)}
         />
-        <Autoclicker
-          zombies={this.state.zombies}
-          handleAutoClick={this.handleAutoClicker}
-          autoclicker="autoclicker1"
-          zps={format(this.state.zps)}
-        />
-        <Autoclicker
-          zombies={this.state.zombies}
-          handleAutoClick={this.handleAutoClicker}
-          autoclicker="autoclicker2"
-          zps={format(this.state.zps)}
-        />
+        {Object.keys(JSONAutoclickers).map((autoclicker) => {
+          return (
+            <Autoclicker
+            zombies={this.state.zombies}
+            handleAutoClick={this.handleAutoClicker}
+            autoclicker={autoclicker}
+            zps={this.state.autoClickTotal}
+            handleUpgrade={this.handleUpgrade}
+          />
+          )
+        })}
       </div>
     )
   }

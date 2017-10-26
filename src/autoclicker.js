@@ -22,7 +22,10 @@ class Autoclicker extends Component {
     this.setState({
       number: this.state.number + 1
     })
-    this.props.handleAutoClick(JSONAutoclickers[this.props.autoclicker]["clickValue"], this.incrementPrice(JSONAutoclickers[this.props.autoclicker]["price"]))
+    this.props.handleAutoClick(
+      JSONAutoclickers[this.props.autoclicker]["clickValue"],
+      this.incrementPrice(JSONAutoclickers[this.props.autoclicker]["price"])
+    )
   }
   
   //Activates <Autoclicker />'s button when trigger is reached
@@ -34,8 +37,23 @@ class Autoclicker extends Component {
     }
   }
 
+  handleUpgrade = (value, type) => {
+    this.props.handleUpgrade(value, type)
+    switch(type){
+      case '+':
+        JSONAutoclickers[this.props.autoclicker]["clickValue"] = +JSONAutoclickers[this.props.autoclicker]["clickValue"] + +value
+        break
+      case 'x':
+        JSONAutoclickers[this.props.autoclicker]["clickValue"] = JSONAutoclickers[this.props.autoclicker]["clickValue"] * value
+        break
+      default:
+        console.error("Error : upgrade not found")
+    }
+  }
+
   render() {
     var target = JSONAutoclickers[this.props.autoclicker]
+    var percent = Math.round(((this.state.number*target["clickValue"])*100) / this.props.zps) || 0
     return (
       <div className="container">
         <div className="card">
@@ -44,7 +62,7 @@ class Autoclicker extends Component {
               {target["title"]}
               <span className="right">{format(this.incrementPrice(target["price"]))}</span>
             </div>
-            <span className="right">x{this.state.number}</span>
+            <span className="right">x{this.state.number}({percent}%)</span>
             <p>{target["description"]}</p>
           </div>
           <div className="card-action">
@@ -58,6 +76,7 @@ class Autoclicker extends Component {
                   <Upgrade
                     autoclicker={this.props.autoclicker}
                     upgrade={upgrade}
+                    handleUpgrade={this.handleUpgrade}
                   />
                 )
               })}

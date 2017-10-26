@@ -42,32 +42,32 @@ class Login extends Component {
   render() {
     return (
         <div id="modal">
-            <button data-target="modal1" class="btn modal-trigger" onClick={this.openModal}>Login</button>
+            <button data-target="modal1" className="btn modal-trigger" onClick={this.openModal}>Login</button>
             <Modal
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}
             style={customStyles}
             contentLabel="Example Modal"
             >
-            <h2 class="center-align">Login</h2>
-            <div class="row">
-                <form class="col s12">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="username" type="text" class="validate"/>
+            <h2 className="center-align">Login</h2>
+            <div className="row">
+                <form className="col s12">
+                    <div className="row">
+                        <div className="input-field col s12">
+                            <input id="username" type="text" className="validate"/>
                             <label for="username">Username</label>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="pass" type="password" class="validate"/>
+                    <div className="row">
+                        <div className="input-field col s12">
+                            <input id="pass" type="password" className="validate"/>
                             <label for="pass">Password</label>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col m12">
-                            <p class="center-align">
-                                <button class="btn btn-large waves-effect waves-light" type="button" name="action">Login</button>
+                    <div className="row">
+                        <div className="col m12">
+                            <p className="center-align">
+                                <button className="btn btn-large waves-effect waves-light" type="button" name="action">Login</button>
                             </p>
                         </div>
                     </div>

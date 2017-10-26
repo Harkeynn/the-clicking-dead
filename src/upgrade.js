@@ -3,11 +3,19 @@ import './upgrade.css'
 import JSONAutoclickers from './autoclickers.json'
 
 class Upgrade extends Component{
+
+  handleUpgrade = () => {
+    this.props.handleUpgrade(
+      JSONAutoclickers[this.props.autoclicker]["upgrades"][this.props.upgrade]["upgradeValue"],
+      JSONAutoclickers[this.props.autoclicker]["upgrades"][this.props.upgrade]["upgradeType"]
+    )
+  }
+
   render() {
     var target = JSONAutoclickers[this.props.autoclicker]["upgrades"][this.props.upgrade]
     return(
-      <li className="collection-item">
-        {target["title"]}
+      <li className="collection-item" onClick={this.handleUpgrade}>
+        {target["title"]} {target["price"]}
         <span className="right">{target["upgradeType"] + target["upgradeValue"]} upgrade</span>
       </li>
     )

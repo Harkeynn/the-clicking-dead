@@ -9,7 +9,8 @@
         "title": "Titre",
         "upgradeValue": "2",
         "upgradeType": "x",
-        "description": "Description"
+        "description": "Description",
+        "price": "50"
       }
     }
   },
@@ -23,13 +24,15 @@
         "title": "Titre",
         "upgradeValue": "5",
         "upgradeType": "+",
-        "description": "Description"
+        "description": "Description",
+        "price": "500"
       },
       "upgrade2": {
         "title": "Titre",
         "upgradeValue": "2.5",
         "upgradeType": "+",
-        "description": "Description"
+        "description": "Description",
+        "price": "1000"
       }
     }
   }
