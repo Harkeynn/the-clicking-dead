@@ -2,13 +2,15 @@ import React, { Component } from 'react'
 import Increment from './increment'
 import Autoclicker from './autoclicker'
 import {format} from './numbers'
+import Profile from './profile'
+import Login from './login'
 
 class App extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      zombies: 64646746876546546543654,
+      zombies: 0,
       autoClickTotal: 0,
     }
   }
@@ -62,6 +64,8 @@ class App extends Component {
     return (
       <div className="container">
         <h1>The Clicking Dead</h1>
+        <Login/>
+        <Profile/>
         <Increment
           handleZombieIncrement={this.handleZombIncr}
           zombies={format(this.state.zombies)}
