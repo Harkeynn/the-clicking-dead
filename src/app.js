@@ -56,10 +56,10 @@ class App extends Component {
   autoClick() {
     return setInterval(() => {
       this.setState({
-        zombies: Math.round((this.state.zombies + parseFloat(this.state.autoClickTotal)) * 100) / 100
+        zombies: Math.round((this.state.zombies + parseFloat(this.state.autoClickTotal) / 2) * 100) / 100
       })
       document.title = format(Math.floor(this.state.zombies)) + " zombies - The Clicking Dead"
-    }, 1000)
+    }, 500)
   }
 
   handleUpgrade = (value, type) => {
