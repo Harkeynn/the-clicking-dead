@@ -62,6 +62,12 @@ class Signin extends Component {
                 <form className="col s12">
                     <div className="row">
                         <div className="input-field col s12">
+                            <input id="mail" type="email" className="validate"/>
+                            <label htmlFor="pass">E-mail</label>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="input-field col s12">
                             <input id="username" type="text" className="validate"/>
                             <label htmlFor="username">Username</label>
                         </div>
@@ -70,6 +76,12 @@ class Signin extends Component {
                         <div className="input-field col s12">
                             <input id="pass" type="password" className="validate"/>
                             <label htmlFor="pass">Password</label>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="input-field col s12">
+                            <input id="confirm" type="password" className="validate"/>
+                            <label htmlFor="pass">Confirm Password</label>
                         </div>
                     </div>
                     <div className="row">
