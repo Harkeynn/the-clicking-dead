@@ -1,8 +1,8 @@
 const db = require('../db.js');
 const Sequelize = require('sequelize');
 
-const Account = db.define('Account', {
-    nickname: {
+const User = db.define('User', {
+    username: {
         type: Sequelize.STRING
     },
     password: {
@@ -10,12 +10,12 @@ const Account = db.define('Account', {
     }
 });
 
-Account.sync({force: true}).then(() => {
+User.sync({force: true}).then(() => {
     // Table created
-    Account.create({
-        nickname: 'Admin',
+    User.create({
+        username: 'Admin',
         password: 'Admin'
     });
 });
 
-module.exports = Account;
+module.exports = User;

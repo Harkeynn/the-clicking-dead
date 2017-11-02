@@ -1,11 +1,11 @@
-const Account = require("../models/account");
+const User = require("../models/user");
 const pug = require('pug');
 
 function index(req, res) {
-    Account.findAll().then(accounts => {
+    User.findAll().then(users => {
         // console.log(message);
-        res.write(pug.renderFile('src/views/account/index.pug', {
-            accounts: accounts
+        res.write(pug.renderFile('src/views/user/index.pug', {
+            users: users
         }));
         //res.write(message.pseudo + " : " + message.message);
         res.end();
