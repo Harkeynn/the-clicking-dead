@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
-import Signin from './signin';
 
 const customStyles = {
     overlay: {
@@ -22,12 +21,12 @@ const customStyles = {
     },
 };
 
-class Login extends Component {
+class Signin extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            modalIsOpen: true,
+            modalIsOpen: false,
         }
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
@@ -41,21 +40,24 @@ class Login extends Component {
         this.setState({ modalIsOpen: false });
     }
 
-	tryLogin() {
-		console.log("Tentative de log");
+	trySignin() {
+		console.log("Tentative de sign");
 	}
 
   render() {
     return (
         <div id="modal">
+            <p className="right-align">
+                <a style={{cursor:'pointer'}} onClick={this.openModal}>SignIn</a>
+            </p>
             <Modal
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}
             style={customStyles}
             shouldCloseOnOverlayClick={false}
-            contentLabel="Login"
+            contentLabel="Example Modal"
             >
-            <h2 className="center-align">Login</h2>
+            <h2 className="center-align">Sign In</h2>
             <div className="row">
                 <form className="col s12">
                     <div className="row">
@@ -73,11 +75,8 @@ class Login extends Component {
                     <div className="row">
                         <div className="col m12">
                             <p className="center-align">
-                                <button className="btn btn-large waves-effect waves-light" type="button" name="action" onClick={this.tryLogin}>Login</button>
+                                <button className="btn btn-large waves-effect waves-light" type="button" name="action" onClick={this.trySignin}>Sign in</button>
                             </p>
-                        </div>
-                        <div className="col m12">
-                            <Signin/>
                         </div>
                     </div>
                 </form>
@@ -87,4 +86,4 @@ class Login extends Component {
     )}
 }
 
-export default Login
+export default Signin
