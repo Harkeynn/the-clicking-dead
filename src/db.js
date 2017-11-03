@@ -9,7 +9,14 @@ const db = new Sequelize({
         idle: 10000
     },
 
-    storage: 'db.sqlite'
+    storage: 'DB/db.sqlite'
+});
+
+db.authenticate().then(() => {
+  console.log('Connection has been established successfully.');
+})
+.catch(err => {
+  console.error('Unable to connect to the database:', err);
 });
 
 module.exports = db;

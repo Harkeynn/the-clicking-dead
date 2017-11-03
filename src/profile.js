@@ -35,7 +35,7 @@ class Profile extends Component {
   openModal() {
     this.setState({modalIsOpen: true});
   }
- 
+
   closeModal() {
     this.setState({modalIsOpen: false});
   }
