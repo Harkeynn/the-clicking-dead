@@ -1,33 +1,31 @@
 import React, { Component } from 'react'
 import Upgrade from './upgrade'
 import JSONAutoclickers from './autoclickers.json'
-import {format} from './numbers'
+import { format } from './numbers'
 
 class Autoclicker extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      number: 0,
       percent: 0,
     }
   }
 
-  incrementPrice(price){
-    return Math.round(price*Math.pow(1.15,this.state.number))
+  //set price to base price * 1.15^N (N=number of autoclicker(s))
+  incrementPrice(price) {
+    return Math.round(price * Math.pow(1.15, JSONAutoclickers[this.props.autoclicker]["number"]))
   }
 
   //Updates the number of this auto zombiefier and sends the value to add to the total of zombie/sec to app
   handleBuy = () => {
-    this.setState({
-      number: this.state.number + 1
-    })
-    this.props.handleAutoClick(
-      JSONAutoclickers[this.props.autoclicker]["clickValue"],
-      this.incrementPrice(JSONAutoclickers[this.props.autoclicker]["price"])
-    )
+    JSONAutoclickers[this.props.autoclicker]["number"]++
+    JSONAutoclickers[this.props.autoclicker]["totalClickValue"] = +JSONAutoclickers[this.props.autoclicker]["totalClickValue"] + +JSONAutoclickers[this.props.autoclicker]["clickValue"]
+    this.props.handleAutoClick(JSONAutoclickers[this.props.autoclicker]["price"])
+    JSONAutoclickers[this.props.autoclicker]["incrementedPrice"] = this.incrementPrice(JSONAutoclickers[this.props.autoclicker]["price"])
+    console.log("price = " + JSONAutoclickers[this.props.autoclicker]["price"])
   }
-  
+
   //Activates <Autoclicker />'s button when trigger is reached
   activator(trigger) {
     if (this.props.zombies >= trigger) {
@@ -37,32 +35,37 @@ class Autoclicker extends Component {
     }
   }
 
-  handleUpgrade = (value, type) => {
-    this.props.handleUpgrade(value, type)
-    switch(type){
+  //Detects if the upgrade is an additon or multiplication
+  //Updates the base click value and the total click value
+  //Calls a function to update ZPS
+  handleUpgrade = (autoclicker, upgrade) => {
+    switch (upgrade["upgradeType"]) {
       case '+':
-        JSONAutoclickers[this.props.autoclicker]["clickValue"] = +JSONAutoclickers[this.props.autoclicker]["clickValue"] + +value
+        autoclicker["clickValue"] = +autoclicker["clickValue"] + +upgrade["upgradeValue"]
+        autoclicker["totalClickValue"] = +autoclicker["clickValue"] * autoclicker["number"]
         break
       case 'x':
-        JSONAutoclickers[this.props.autoclicker]["clickValue"] = JSONAutoclickers[this.props.autoclicker]["clickValue"] * value
+        autoclicker["clickValue"] = autoclicker["clickValue"] * upgrade["upgradeValue"]
+        autoclicker["totalClickValue"] = autoclicker["clickValue"] * autoclicker["number"]
         break
       default:
         console.error("Error : upgrade not found")
     }
+    this.props.handleUpgrade(upgrade["price"])
   }
 
   render() {
     var target = JSONAutoclickers[this.props.autoclicker]
-    var percent = Math.round(((this.state.number*target["clickValue"])*100) / this.props.zps) || 0
+    var percent = Math.round(((target["number"] * target["clickValue"]) * 100) / this.props.zps) || 0
     return (
       <div className="container">
         <div className="card">
           <div className="card-content">
             <div className="card-title activator">
               {target["title"]}
-              <span className="right">{format(this.incrementPrice(target["price"]))}</span>
+              <span className="right">{format(target["incrementedPrice"])}</span>
             </div>
-            <span className="right">x{this.state.number}({percent}%)</span>
+            <span className="right">x{target["number"]}({percent}%)</span>
             <p>{target["description"]}</p>
           </div>
           <div className="card-action">

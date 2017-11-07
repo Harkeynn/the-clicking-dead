@@ -3,7 +3,10 @@
     "title": "Titre",
     "description": "Description",
     "price": "10",
+    "incrementedPrice": "10",
     "clickValue": "0.1",
+    "totalClickValue": "0",
+    "number": "0",
     "upgrades": {
       "upgrade1": {
         "title": "Titre",
@@ -18,7 +21,10 @@
     "title": "Titre",
     "description": "Description",
     "price": "100",
+    "incrementedPrice": "100",
     "clickValue": "1",
+    "totalClickValue": "0",
+    "number": "0",
     "upgrades":{
       "upgrade1": {
         "title": "Titre",

@@ -74,6 +74,7 @@ class Login extends Component {
                         <div className="col m12">
                             <p className="center-align">
                                 <button className="btn btn-large waves-effect waves-light" type="button" name="action" onClick={this.tryLogin}>Login</button>
+                                <button className="btn btn-large waves-effect waves-light" type="button" name="action" onClick={this.closeModal}>Fermer</button>
                             </p>
                         </div>
                         <div className="col m12">

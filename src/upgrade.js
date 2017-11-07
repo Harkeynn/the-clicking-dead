@@ -5,10 +5,7 @@ import JSONAutoclickers from './autoclickers.json'
 class Upgrade extends Component{
 
   handleUpgrade = () => {
-    this.props.handleUpgrade(
-      JSONAutoclickers[this.props.autoclicker]["upgrades"][this.props.upgrade]["upgradeValue"],
-      JSONAutoclickers[this.props.autoclicker]["upgrades"][this.props.upgrade]["upgradeType"]
-    )
+    this.props.handleUpgrade(JSONAutoclickers[this.props.autoclicker], JSONAutoclickers[this.props.autoclicker]["upgrades"][this.props.upgrade])
   }
 
   render() {

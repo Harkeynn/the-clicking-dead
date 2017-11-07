@@ -34,13 +34,16 @@ class App extends Component {
     )
   }
 
-  //Adds the value of the auto zombiefier bought to the total of zombie/sec
-  handleAutoClicker = (clickValue, price) => {
+  //Adds the value of the autoclicker bought to the total of ZPS
+  //Or update the total of ZPS if an upgrade has been bought
+  handleAutoClick = (price) => {
+    let totalZPS = 0
+    Object.keys(JSONAutoclickers).map((autoclicker) => {
+      return totalZPS = totalZPS + +JSONAutoclickers[autoclicker]["totalClickValue"]
+    })
     this.setState({
-      //TODO
-      //prix = prix de base * 1.15^M (M=nombre d'autoclicker(s) acheté(s))
       zombies: this.state.zombies - price,
-      autoClickTotal: this.state.autoClickTotal + parseFloat(clickValue)
+      autoClickTotal: totalZPS
     })
     if (this.state.autoClickTotal === 0) {
       //Set timer for the first time
@@ -62,11 +65,6 @@ class App extends Component {
     }, 500)
   }
 
-  handleUpgrade = (value, type) => {
-    console.log(value, type)
-    
-  }
-
   render() {
     return (
       <div className="container">
@@ -82,10 +80,10 @@ class App extends Component {
           return (
             <Autoclicker
             zombies={this.state.zombies}
-            handleAutoClick={this.handleAutoClicker}
+            handleAutoClick={this.handleAutoClick}
             autoclicker={autoclicker}
             zps={this.state.autoClickTotal}
-            handleUpgrade={this.handleUpgrade}
+            handleUpgrade={this.handleAutoClick}
           />
           )
         })}
