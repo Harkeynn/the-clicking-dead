@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
+import Login from './login'
 
 const customStyles = {
     overlay: {
@@ -88,7 +89,11 @@ class Signin extends Component {
                         <div className="col m12">
                             <p className="center-align">
                                 <button className="btn btn-large waves-effect waves-light" type="button" name="action" onClick={this.trySignin}>Sign in</button>
+                                <button className="btn btn-large waves-effect waves-light" type="button" name="action" onClick={this.closeModal}>Fermer</button>
                             </p>
+                        </div>
+                        <div className="col m12">
+                            <Login/>
                         </div>
                     </div>
                 </form>

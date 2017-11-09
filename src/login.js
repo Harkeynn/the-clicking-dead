@@ -48,6 +48,9 @@ class Login extends Component {
   render() {
     return (
         <div id="modal">
+            <p className="right-align">
+                <a style={{cursor:'pointer'}} onClick={this.openModal}>Login</a>
+            </p>
             <Modal
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}
