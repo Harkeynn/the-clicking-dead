@@ -13,7 +13,9 @@
         "upgradeValue": "2",
         "upgradeType": "x",
         "description": "Description",
-        "price": "50"
+        "price": "50",
+        "unlockAt":"10",
+        "bought": "false"
       }
     }
   },
@@ -31,14 +33,18 @@
         "upgradeValue": "5",
         "upgradeType": "+",
         "description": "Description",
-        "price": "500"
+        "price": "500",
+        "unlockAt":"10",
+        "bought": "false"
       },
       "upgrade2": {
         "title": "Titre",
         "upgradeValue": "2.5",
         "upgradeType": "+",
         "description": "Description",
-        "price": "1000"
+        "price": "1000",
+        "unlockAt":"25",
+        "bought": "false"
       }
     }
   }

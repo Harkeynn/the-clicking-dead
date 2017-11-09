@@ -11,7 +11,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      zombies: 0,
+      zombies: 90,
       autoClickTotal: 0,
     }
 
@@ -84,6 +84,7 @@ class App extends Component {
             autoclicker={autoclicker}
             zps={this.state.autoClickTotal}
             handleUpgrade={this.handleAutoClick}
+            key={autoclicker}
           />
           )
         })}

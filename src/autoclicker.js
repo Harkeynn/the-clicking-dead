@@ -80,6 +80,8 @@ class Autoclicker extends Component {
                     autoclicker={this.props.autoclicker}
                     upgrade={upgrade}
                     handleUpgrade={this.handleUpgrade}
+                    zombies={this.props.zombies}
+                    key={upgrade}
                   />
                 )
               })}
