@@ -21,9 +21,8 @@ class Autoclicker extends Component {
   handleBuy = () => {
     JSONAutoclickers[this.props.autoclicker]["number"]++
     JSONAutoclickers[this.props.autoclicker]["totalClickValue"] = +JSONAutoclickers[this.props.autoclicker]["totalClickValue"] + +JSONAutoclickers[this.props.autoclicker]["clickValue"]
-    this.props.handleAutoClick(JSONAutoclickers[this.props.autoclicker]["price"])
+    this.props.handleAutoClick(JSONAutoclickers[this.props.autoclicker]["incrementedPrice"])
     JSONAutoclickers[this.props.autoclicker]["incrementedPrice"] = this.incrementPrice(JSONAutoclickers[this.props.autoclicker]["price"])
-    console.log("price = " + JSONAutoclickers[this.props.autoclicker]["price"])
   }
 
   //Activates <Autoclicker />'s button when trigger is reached
