@@ -75,7 +75,6 @@ class Signin extends Component {
 				this.setState({
 					password: passwordHash.generate(this.state.password)
 				}, () => {
-					console.log(this.state.password)
 					AddUser.addUser(this.state)
 					this.closeModal()
 				})

@@ -28,9 +28,9 @@ app.post('/leaderboard', (req, res) => {
     return leaderboardController.create(req, res)
 })
 
-app.use((req, res) => {
-    res.sendStatus(404);
-})
+// app.use((req, res) => {
+//     res.sendStatus(404);
+// })
 
 app.listen(port, () => {
     console.log('Listening on ', port)

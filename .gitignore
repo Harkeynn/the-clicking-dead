@@ -1,13 +1,16 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+/client/node_modules
+/api/node_modules
 
 # testing
-/coverage
+/client/coverage
+/api/coverage
 
 # production
-/build
+/client/build
+/api/build
 
 # misc
 .DS_Store
@@ -17,5 +20,7 @@
 .env.production.local
 
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+/api/yarn-debug.log*
+/api/yarn-error.log*
+/client/yarn-debug.log*
+/client/yarn-error.log*
