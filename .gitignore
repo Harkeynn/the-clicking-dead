@@ -24,3 +24,10 @@ npm-debug.log*
 /api/yarn-error.log*
 /client/yarn-debug.log*
 /client/yarn-error.log*
+
+#intellij
+./idea
+idea/*
+
+#conf
+db.conf.js
