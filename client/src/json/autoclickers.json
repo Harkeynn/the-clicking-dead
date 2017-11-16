@@ -1,0 +1,56 @@
+{
+  "autoclicker1": {
+    "title": "Zombies contagieux",
+    "description": "Créé des zombies qui répandent le virus pour vous",
+    "price": "10",
+    "incrementedPrice": "10",
+    "clickValue": "0.1",
+    "totalClickValue": "0",
+    "number": "0",
+    "upgrades": {
+      "upgrade1": {
+        "title": "Steroïdes",
+        "upgradeValue": "2",
+        "upgradeType": "x",
+        "description": "Description",
+        "price": "50",
+        "unlockAt":"10",
+        "bought": "false",
+        "value": "1"
+      }
+    },
+    "value": "1"
+  },
+  "autoclicker2": {
+    "title": "Zombies sprinters",
+    "description": "Créé des zombies sprinters qui répandent le virus pour vous",
+    "price": "100",
+    "incrementedPrice": "100",
+    "clickValue": "1",
+    "totalClickValue": "0",
+    "number": "0",
+    "upgrades":{
+      "upgrade1": {
+        "title": "Usain Bolt",
+        "upgradeValue": "5",
+        "upgradeType": "+",
+        "description": "",
+        "price": "500",
+        "unlockAt":"10",
+        "bought": "false",
+        "value": "1"
+      },
+      "upgrade2": {
+        "title": "Le mur du son",
+        "upgradeValue": "2.5",
+        "upgradeType": "+",
+        "description": "Description",
+        "price": "1000",
+        "unlockAt":"25",
+        "bought": "false",
+        "value": "2"
+      }
+    },
+    "value": "2"
+  }
+}

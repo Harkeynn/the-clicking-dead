@@ -1,2 +1,25 @@
 # dependencies
-/node_modules
+/client/node_modules
+/api/node_modules
+
+# testing
+/client/coverage
+/api/coverage
+
+# production
+/client/build
+/api/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+/api/yarn-debug.log*
+/api/yarn-error.log*
+/client/yarn-debug.log*
+/client/yarn-error.log*
+>>>>>>> develop
