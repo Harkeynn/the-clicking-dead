@@ -54,7 +54,14 @@ Pour des versions plus avancées, nous envisageons de laisser le joueur choisir 
 * Best username ever
 
 ## Usage :
-`npm install`
+`npm install` dans les folders /client et /api
+
+Modifier le fichier `db.conf.js` en saisissant les informations de connexion à la base de donnée mysql.
+
+`npm start` dans le folder /api pour lancer le serveur node
+`npm start`dans le folder /client pour lancer le client
+
+
 
 ### Credits :
 BOR Pierre
