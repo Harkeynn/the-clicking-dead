@@ -1,37 +1,40 @@
 const qs = require('querystring')
 const accountController = require('./controllers/account')
 const leaderboardController = require('./controllers/leaderboard')
-const cors = require('./middlewares/cors')
-const express = require('express')
+
+var express = require('express')
+var session  = require('express-session');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 const app = express()
 const port = 1973
 
-app.use(cors)
+var passport = require('passport');
+var flash    = require('connect-flash');
 
-app.get('/accounts', (req, res) => {
-    return accountController.index(req, res)
-})
+require('./middlewares/passport')(passport); // pass passport for configuration
 
-app.post('/accounts', (req, res) => {
-    return accountController.create(req, res)
-})
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 
-app.get('/accounts/:nickname', (req, res) => {
-    return accountController.indexOne(req, res)
-})
+app.use(session({
+    secret: 'vidyapathaisalwaysrunning',
+    resave: true,
+    saveUninitialized: true
+} )); // session secret
 
-app.get('/leaderboard', (req, res) => {
-    return leaderboardController.index(req, res)
-})
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
 
-app.post('/leaderboard', (req, res) => {
-    return leaderboardController.create(req, res)
-})
+// routes ======================================================================
+require('./routes')(app, passport); // load our routes and pass in our app and fully configured passport
 
-// app.use((req, res) => {
-//     res.sendStatus(404);
-// })
+// launch ======================================================================
+app.listen(port);
+console.log('The magic happens on port ' + port);
 
-app.listen(port, () => {
-    console.log('Listening on ', port)
-})
+

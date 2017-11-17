@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+ 	import React, { Component } from 'react'
 import Modal from 'react-modal'
 import Signin from './signin'
 const passwordHash = require('password-hash')
@@ -54,11 +54,22 @@ class Login extends Component {
 			password: e.target.value
 		})
 	}
-
-	handleSubmit = (e) => {
+    handleSubmit = (e) => {
 		e.preventDefault()
-		fetch(`http://localhost:1973/accounts/${this.state.nickname}`)
+		fetch(`http://localhost:1973/game`, {
+			mode: 'cors',
+			method: 'post',
+			headers: {
+				'Access-Control-Allow-Origin': '*',
+				'Content-Type': 'application/json'
+			},
+			body: {
+				"username": this.state.username,
+				"password": this.state.password
+			}
+		})
 		.then((res) => {
+			console.log('MAXXX : ' + res);
       return res.json()
     })
     .then(jsonData => {
@@ -117,9 +128,21 @@ class Login extends Component {
 								</div>
 							</div>
 						</form>
+
+						{/*<form onSubmit={this.handleSubmit}>
+							<div className="form-group">
+								<label>Username</label>
+								<input type="text" className="form-control" name="username" value={this.state.nickname}/>
+							</div>
+							<div className="form-group">
+								<label>Password</label>
+								<input type="password" className="form-control" name="password" value={this.state.password} />
+							</div>
+							<button type="submit" className="btn btn-warning btn-lg">Login</button>
+						</form>
 						<div className="col m12">
 							<Signin />
-						</div>
+						</div>*/}
 					</div>
 				</Modal>
 			</div>
