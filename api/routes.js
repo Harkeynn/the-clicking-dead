@@ -1,6 +1,16 @@
 // app/routes.js
 module.exports = function(app, passport) {
 
+    app.all('/*', function(req, response, next) {
+            // res.header("Access-Control-Allow-Origin", "*");
+
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+        response.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+        next();
+    });
+
     app.get('/accounts', (req, res) => {
         return accountController.index(req, res)
     })
