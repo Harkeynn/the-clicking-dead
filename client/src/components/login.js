@@ -55,34 +55,53 @@ class Login extends Component {
 		})
 	}
     handleSubmit = (e) => {
-		e.preventDefault()
-		fetch(`http://localhost:1973/game`, {
-			mode: 'cors',
-			method: 'post',
-			headers: {
-				'Access-Control-Allow-Origin': '*',
-				'Content-Type': 'application/json'
-			},
-			body: {
-				"username": this.state.username,
-				"password": this.state.password
-			}
-		})
-		.then((res) => {
-			console.log('MAXXX : ' + res);
-      return res.json()
-    })
-    .then(jsonData => {
-			if(jsonData === null) throw new Error("This account doesn't exist !!")
-			if(passwordHash.verify(this.state.password, jsonData.password)){
-				this.closeModal()
-			}else{
-				throw new Error("Bad nick/pw")
-			}
-		})
-		.catch(err => {
-			console.log(err)
-		})
+		// e.preventDefault()
+		// fetch(`http://localhost:1973/game`, {
+		// 	mode: 'cors',
+		// 	method: 'POST',
+		// 	headers: {
+		// 		'Access-Control-Allow-Origin': '*',
+		// 		'Content-Type': 'application/json'
+		// 	},
+		// 	body: {
+		// 		"username": this.state.username,
+		// 		"password": this.state.password
+		// 	}
+		// })
+		// .then((res) => {
+		// 	console.log('MAXXX : ' + res);
+    //   return res.json()
+    // })
+    // .then(jsonData => {
+		// 	if(jsonData === null) throw new Error("This account doesn't exist !!")
+		// 	if(passwordHash.verify(this.state.password, jsonData.password)){
+		// 		this.closeModal()
+		// 	}else{
+		// 		throw new Error("Bad nick/pw")
+		// 	}
+		// })
+		// .catch(err => {
+		// 	console.log(err)
+		// })
+
+
+
+
+        e.preventDefault()
+
+        fetch('http://localhost:1973/game', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: this.state.nickname,
+                password: this.state.password,
+            })
+        }).then((res) => {
+            		this.closeModal()
+ 		})
 	}
 
 

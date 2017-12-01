@@ -2,7 +2,6 @@
 module.exports = function(app, passport) {
 
     app.all('/*', function(req, response, next) {
-            // res.header("Access-Control-Allow-Origin", "*");
 
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Credentials", "true");
@@ -33,20 +32,24 @@ module.exports = function(app, passport) {
 
     // process the login form
     app.post('/game', passport.authenticate('local-login', {
-            successRedirect : '/', // redirect to the secure profile section
+            successRedirect : '/game', // redirect to the secure profile section
             failureRedirect : '/login', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }),
         function(req, res) {
-            console.log("hello");
+            console.log("MAAAAAAAAAAAAAAAAAAAAXX");
 
             if (req.body.remember) {
                 req.session.cookie.maxAge = 1000 * 60 * 3;
             } else {
                 req.session.cookie.expires = false;
             }
-            res.redirect('/');
+            res.json({
+                status: 'success'
+            })
         });
+
+
 
     // =====================================
     // SIGNUP ==============================
@@ -69,8 +72,8 @@ module.exports = function(app, passport) {
     // =====================================
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
-    app.get('/', isLoggedIn, function(req, res) {
-        return {call: true}
+    app.get('/game', isLoggedIn, function(req, res) {
+        console.log('hey tes co');
     });
 
     // =====================================
@@ -84,11 +87,16 @@ module.exports = function(app, passport) {
 
 // route middleware to make sure
 function isLoggedIn(req, res, next) {
-
     // if user is authenticated in the session, carry on
     if (req.isAuthenticated())
         return next();
 
+
+
     // if they aren't redirect them to the home page
-    res.redirect('/');
+    console.log("tes coooo mon gars :!!!!!!!!!!!!!!!!!!!!!!!!");
+    res.json({
+        status: 'success'
+    })
+    // res.redirect('/');
 }
