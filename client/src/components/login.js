@@ -189,69 +189,8 @@ class Login extends Component {
 				</Modal>
 			</div>
 		
-		/*
-		<div id="modal">
-				<a data-target="modal1" className="btn modal-trigger" onClick={this.openModal}>Log Out</a>
-				<Modal
-					isOpen={this.state.modalIsOpen}
-					onRequestClose={this.closeModal}
-					style={customStyles}
-					shouldCloseOnOverlayClick={false}
-					contentLabel="Login"
-				>
-					<h2 className="center-align">Login</h2>
-					<div className="row">
-						<form className="col s12" onSubmit={this.handleSubmit}>
-							<div className="row">
-								<div className="input-field col s12">
-									<input id="nickname"
-										type="text"
-										className="validate"
-										value={this.state.nickname}
-										onChange={this.handleNicknameChange} />
-									<label htmlFor="username">Username</label>
-								</div>
-							</div>
-							<div className="row">
-								<div className="input-field col s12">
-									<input id="pass"
-											type="password"
-											className="validate"
-											value={this.state.password}
-											onChange={this.handlePasswordChange} />
-									<label htmlFor="pass">Password</label>
-								</div>
-							</div>
-							<div className="row">
-								<div className="col m12">
-									<p className="center-align">
-										<button className="btn btn-large waves-effect waves-light" type="submit" name="action">Login</button>
-									</p>
-								</div>
-							</div>
-							<div className="col m12">
-								<Signin />
-							</div>
-						</form>
 
-						{/*<form onSubmit={this.handleSubmit}>
-							<div className="form-group">
-								<label>Username</label>
-								<input type="text" className="form-control" name="username" value={this.state.nickname}/>
-							</div>
-							<div className="form-group">
-								<label>Password</label>
-								<input type="password" className="form-control" name="password" value={this.state.password} />
-							</div>
-							<button type="submit" className="btn btn-warning btn-lg">Login</button>
-						</form>
-						<div className="col m12">
-							<Signin />
-						</div>*/}
-					</div>
-				</Modal>
-			</div>
-		*/
+
 			
 		)
 	}
