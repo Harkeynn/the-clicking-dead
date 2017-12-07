@@ -73,10 +73,22 @@ class Signin extends Component {
 		try{
 				if(this.state.password === this.state.passwordV){
 				this.setState({
-					password: passwordHash.generate(this.state.password)
+					password: this.state.password
 				}, () => {
-					AddUser.addUser(this.state)
-					this.closeModal()
+
+                    fetch('http://localhost:1973/signup', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            username: this.state.nickname,
+                            password: this.state.password,
+                        })
+                    }).then((res) => {
+                        this.closeModal()
+                    })
 				})
 			}else{
 				throw new Error("Les mots de passe ne correspondent pas !")
@@ -104,44 +116,46 @@ class Signin extends Component {
 				>
 					<h2 className="center-align">Sign In</h2>
 					<div className="row">
+
+
 						<form className="col s12" onSubmit={this.handleSubmit}>
 							<div className="row">
 								<div className="input-field col s12">
 									<input id="mail"
-										type="email"
-										className="validate"
-										value={this.state.mail}
-										onChange={this.handleEmailChange} />
+										   type="email"
+										   className="validate"
+										   value={this.state.mail}
+										   onChange={this.handleEmailChange} />
 									<label htmlFor="username">Email</label>
 								</div>
 							</div>
 							<div className="row">
 								<div className="input-field col s12">
 									<input id="nickname"
-										type="text"
-										className="validate"
-										value={this.state.nickname}
-										onChange={this.handleNicknameChange} />
+										   type="text"
+										   className="validate"
+										   value={this.state.nickname}
+										   onChange={this.handleNicknameChange} />
 									<label htmlFor="username">Nickname</label>
 								</div>
 							</div>
 							<div className="row">
 								<div className="input-field col s12">
 									<input id="pass"
-										type="password"
-										className="validate"
-										value={this.state.password}
-										onChange={this.handlePasswordChange} />
+										   type="password"
+										   className="validate"
+										   value={this.state.password}
+										   onChange={this.handlePasswordChange} />
 									<label htmlFor="pass">Password</label>
 								</div>
 							</div>
 							<div className="row">
 								<div className="input-field col s12">
 									<input id="confirm"
-										type="password"
-										className="validate"
-										value={this.state.passwordV}
-										onChange={this.handlePasswordVChange} />
+										   type="password"
+										   className="validate"
+										   value={this.state.passwordV}
+										   onChange={this.handlePasswordVChange} />
 									<label htmlFor="pass">Confirm Password</label>
 								</div>
 							</div>
@@ -154,6 +168,73 @@ class Signin extends Component {
 								</div>
 							</div>
 						</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+						{/*<form className="col s12" onSubmit={this.handleSubmit}>*/}
+							{/*<div className="row">*/}
+								{/*<div className="input-field col s12">*/}
+									{/*<input id="mail"*/}
+										{/*type="email"*/}
+										{/*className="validate"*/}
+										{/*value={this.state.mail}*/}
+										{/*onChange={this.handleEmailChange} />*/}
+									{/*<label htmlFor="username">Email</label>*/}
+								{/*</div>*/}
+							{/*</div>*/}
+							{/*<div className="row">*/}
+								{/*<div className="input-field col s12">*/}
+									{/*<input id="nickname"*/}
+										{/*type="text"*/}
+										{/*className="validate"*/}
+										{/*value={this.state.nickname}*/}
+										{/*onChange={this.handleNicknameChange} />*/}
+									{/*<label htmlFor="username">Nickname</label>*/}
+								{/*</div>*/}
+							{/*</div>*/}
+							{/*<div className="row">*/}
+								{/*<div className="input-field col s12">*/}
+									{/*<input id="pass"*/}
+										{/*type="password"*/}
+										{/*className="validate"*/}
+										{/*value={this.state.password}*/}
+										{/*onChange={this.handlePasswordChange} />*/}
+									{/*<label htmlFor="pass">Password</label>*/}
+								{/*</div>*/}
+							{/*</div>*/}
+							{/*<div className="row">*/}
+								{/*<div className="input-field col s12">*/}
+									{/*<input id="confirm"*/}
+										{/*type="password"*/}
+										{/*className="validate"*/}
+										{/*value={this.state.passwordV}*/}
+										{/*onChange={this.handlePasswordVChange} />*/}
+									{/*<label htmlFor="pass">Confirm Password</label>*/}
+								{/*</div>*/}
+							{/*</div>*/}
+							{/*<div className="row">*/}
+								{/*<div className="col m12">*/}
+									{/*<p className="center-align">*/}
+										{/*<button className="btn btn-large waves-effect waves-light" type="submit">Sign in</button>*/}
+										{/*<button className="btn btn-large waves-effect waves-light" type="button" name="action" onClick={this.closeModal}>Fermer</button>*/}
+									{/*</p>*/}
+								{/*</div>*/}
+							{/*</div>*/}
+						{/*</form>*/}
 					</div>
 				</Modal>
 			</div>

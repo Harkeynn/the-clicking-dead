@@ -95,12 +95,15 @@ class Login extends Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
+			mode: 'cors',
             body: JSON.stringify({
                 username: this.state.nickname,
                 password: this.state.password,
             })
         }).then((res) => {
-            		this.closeModal()
+        	if(res.status === 200){
+                this.closeModal()
+            }
  		})
 	}
 
@@ -145,6 +148,9 @@ class Login extends Component {
 										<button className="btn btn-large waves-effect waves-light" type="submit" name="action">Login</button>
 									</p>
 								</div>
+							</div>
+							<div className="col m12">
+								<Signin />
 							</div>
 						</form>
 

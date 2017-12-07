@@ -21,14 +21,24 @@ module.exports = function(passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
+        console.log("SERIAL" + user);
+        console.log(user);
+
         done(null, user.id);
+
+
+
+
     });
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
+        console.log("DESERIALIZEUSER");
+
         connection.query("SELECT * FROM users WHERE id = ? ",[id], function(err, rows){
             done(err, rows[0]);
         });
+
     });
 
     // =========================================================================
@@ -59,7 +69,7 @@ module.exports = function(passport) {
                         var newUserMysql = {
                             username: username,
                             password: bcrypt.hashSync(password, null, null)  // use the generateHash function in our user model
-                        };
+                            };
 
                         var insertQuery = "INSERT INTO users ( username, password ) values (?,?)";
 
@@ -82,15 +92,18 @@ module.exports = function(passport) {
     passport.use(
         'local-login',
         new LocalStrategy({
+
                 // by default, local strategy uses username and password, we will override with email
                 usernameField : 'username',
                 passwordField : 'password',
-                passReqToCallback : true // allows us to pass back the entire request to the callback
+                passReqToCallback : true, // allows us to pass back the entire request to the callback
+                session: true
             },
             function(req, username, password, done) { // callback with email and password from our form
                 connection.query("SELECT * FROM users WHERE username = ?",[username], function(err, rows){
-                    if (err)
+                    if (err) {
                         return done(err);
+                    }
                     if (!rows.length) {
                         return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
                     }

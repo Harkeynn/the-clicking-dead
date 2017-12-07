@@ -1,14 +1,7 @@
 // app/routes.js
 module.exports = function(app, passport) {
-
-    app.all('/*', function(req, response, next) {
-
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-        response.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-        next();
-    });
+    const accountController = require('./controllers/account')
+    const leaderboardController = require('./controllers/leaderboard')
 
     app.get('/accounts', (req, res) => {
         return accountController.index(req, res)
@@ -30,24 +23,54 @@ module.exports = function(app, passport) {
         return leaderboardController.create(req, res)
     })
 
-    // process the login form
+    //process the login form
     app.post('/game', passport.authenticate('local-login', {
             successRedirect : '/game', // redirect to the secure profile section
             failureRedirect : '/login', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }),
         function(req, res) {
-            console.log("MAAAAAAAAAAAAAAAAAAAAXX");
+            console.log("REQ")
 
+            console.log(req)
             if (req.body.remember) {
                 req.session.cookie.maxAge = 1000 * 60 * 3;
             } else {
                 req.session.cookie.expires = false;
             }
-            res.json({
-                status: 'success'
-            })
         });
+
+    // app.post('/game', passport.authenticate('local-login', {
+    //         successRedirect : '/game', // redirect to the secure profile section
+    //         failureRedirect : '/login', // redirect back to the signup page if there is an error
+    //         failureFlash : true // allow flash messages
+    //     }),
+    //     function(req, res) {
+    //
+    //         if (req.body.remember) {
+    //             req.session.cookie.maxAge = 1000 * 60 * 3;
+    //         } else {
+    //             req.session.cookie.expires = false;
+    //         }
+    //     });
+
+/*        app.post('/game', function (req, res, next) {
+            passport.authenticate('local-login', function (err, user, info) {
+                if (err) {
+                    // mysend(res, 500, 'Ups. Something broke!');
+                } else if (info) {
+                    // mysend(res, 401, 'unauthorized');
+                } else {
+                    req.login(user, function(err) {
+                        if (err) {
+                            // mysend(res, 500, 'Ups.');
+                        } else {
+                            // mysend(res, 200, JSON.stringify(user));
+                        }
+                        })
+                }
+            })(req, res, next);
+        });*/
 
 
 
@@ -57,12 +80,12 @@ module.exports = function(app, passport) {
     // show the signup form
     app.get('/signup', function(req, res) {
         // render the page and pass in any flash data if it exists
-        res.render('signup.ejs', { message: req.flash('signupMessage') });
+        // res.render('signup.ejs', { message: req.flash('signupMessage') });
     });
 
     // process the signup form
     app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect : '/profile', // redirect to the secure profile section
+        successRedirect : '/game', // redirect to the secure profile section
         failureRedirect : '/signup', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }));
@@ -88,10 +111,17 @@ module.exports = function(app, passport) {
 // route middleware to make sure
 function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on
-    if (req.isAuthenticated())
+    console.log("isLoggedIn");
+
+    console.log(req.isAuthenticated());
+
+    if (req.isAuthenticated()) {
+        console.log("isAUTEHNTIFICATE JHUUYVYTYTFYTFRFY");
+
         return next();
 
 
+    }
 
     // if they aren't redirect them to the home page
     console.log("tes coooo mon gars :!!!!!!!!!!!!!!!!!!!!!!!!");
