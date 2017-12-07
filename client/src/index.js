@@ -3,19 +3,22 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import Game from './pages/game'
 import Leaderboard from './pages/leaderboard'
+import 'bootstrap/dist/css/bootstrap.css';
+import 'font-awesome/css/font-awesome.min.css';
 
 class App extends React.Component {
+  
   render() {
     return (
       <Router>
-          <div>
+          
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/game" component={Game}/>
               <Route path="/leaderboard" component={Leaderboard}/>
               <Route component={NoMatch}/>
             </Switch>
-          </div>
+          
       </Router>
     )
   }
