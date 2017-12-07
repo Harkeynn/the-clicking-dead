@@ -3,6 +3,7 @@ module.exports = function(app, passport) {
     const accountController = require('./controllers/account')
     const leaderboardController = require('./controllers/leaderboard')
 
+
     app.get('/accounts', (req, res) => {
         return accountController.index(req, res)
     })
@@ -16,11 +17,35 @@ module.exports = function(app, passport) {
     })
 
     app.get('/leaderboard', (req, res) => {
+        console.log("USEEER" + userData.id);
         return leaderboardController.index(req, res)
     })
 
     app.post('/leaderboard', (req, res) => {
         return leaderboardController.create(req, res)
+    })
+
+    app.get('/user', (req, res) => {
+        console.log("ROUTE GET USER")
+
+        let userData = require('./userdata');
+        let userId = userData.id;
+        console.log(userId);
+
+        if(userId.length === 0){
+            console.log("no user connected ");
+
+            return res.json({
+                shouldModalBeOpened: true
+            })
+        } else {
+            console.log("user connected !!");
+
+            return res.json({
+                shouldModalBeOpened: false
+            })
+        }
+
     })
 
     //process the login form
@@ -30,9 +55,6 @@ module.exports = function(app, passport) {
             failureFlash : true // allow flash messages
         }),
         function(req, res) {
-            console.log("REQ")
-
-            console.log(req)
             if (req.body.remember) {
                 req.session.cookie.maxAge = 1000 * 60 * 3;
             } else {
@@ -98,6 +120,11 @@ module.exports = function(app, passport) {
     app.get('/game', isLoggedIn, function(req, res) {
         console.log('hey tes co');
     });
+
+
+/*    app.get('/game', function(req, res) {
+
+    });*/
 
     // =====================================
     // LOGOUT ==============================

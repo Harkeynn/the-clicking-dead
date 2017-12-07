@@ -2,6 +2,8 @@
 import Modal from 'react-modal'
 import Signin from './signin'
 const passwordHash = require('password-hash')
+// const userData = require('./../../../api/userdata')
+// const userId = userData.id;
 
 const customStyles = {
 	overlay: {
@@ -29,15 +31,37 @@ class Login extends Component {
 		super(props)
 		this.state = {
 			modalIsOpen: true,
+			// modalIsOpen: true,
 			nickname: '',
 			password: ''
 		}
 		this.openModal = this.openModal.bind(this)
 		this.closeModal = this.closeModal.bind(this)
+        this.testModal = this.testModal.bind(this)
 	}
 
-	openModal() {
-		this.setState({ modalIsOpen: true })
+    componentDidMount() {
+       this.testModal();
+    }
+    openModal() {
+        this.setState({ modalIsOpen: true })
+    }
+
+	testModal() {
+		console.log("TESSST MODAL");
+		let result = true;
+        fetch('http://localhost:1973/user')
+            .then((res) => {
+                return res.json()
+            })
+            .then(jsonData => {
+                console.log("result " + jsonData.shouldModalBeOpened);
+                result = jsonData.shouldModalBeOpened;
+                this.setState({ modalIsOpen: result })
+
+            });
+
+        console.log("state before setstate " + result);
 	}
 
 	closeModal() {
@@ -84,7 +108,9 @@ class Login extends Component {
 		// 	console.log(err)
 		// })
 
+        console.log("openModal");
 
+        console.log(this.testModal());
 
 
         e.preventDefault()

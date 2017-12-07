@@ -7,6 +7,7 @@ var mysql = require('mysql');
 var bcrypt = require('bcrypt-nodejs');
 var dbconfig = require('../db.conf');
 var connection = mysql.createConnection(dbconfig.connection);
+const userData = require('../userdata.json');
 
 connection.query('USE ' + dbconfig.database);
 
@@ -23,6 +24,8 @@ module.exports = function(passport) {
     passport.serializeUser(function(user, done) {
         console.log("SERIAL" + user);
         console.log(user);
+        userData.id = [];
+        userData.id.push(user.id);
 
         done(null, user.id);
 
