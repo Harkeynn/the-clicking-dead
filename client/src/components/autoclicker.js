@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import Upgrade from './upgrade'
 import JSONAutoclickers from '../json/autoclickers.json'
 import { format } from './numbers'
+import icon from '../img/illustrations/icon_test.jpg'
+import FontAwesome from 'react-fontawesome'
+import { Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 
 class Autoclicker extends Component {
 
@@ -11,6 +14,7 @@ class Autoclicker extends Component {
       percent: 0,
     }
   }
+
 
   //set price to base price * 1.15^N (N=number of autoclicker(s))
   incrementPrice(price) {
@@ -56,7 +60,45 @@ class Autoclicker extends Component {
   render() {
     var target = JSONAutoclickers[this.props.autoclicker]
     var percent = Math.round(((target["number"] * target["clickValue"]) * 100) / this.props.zps) || 0
+    const tooltipAmelio = (
+      <Tooltip id="tooltip">{target["description"]}</Tooltip>
+    );
+    const tooltipUpdate = (
+      <Tooltip id="tooltip">UPDATE</Tooltip>
+    );
     return (
+
+      <div>
+        <OverlayTrigger placement="left" overlay={tooltipAmelio}>
+        <div className={this.activator(this.incrementPrice(target["price"])) ? "improvementBox" : "improvementBox unvailable"} onClick={this.handleBuy}>
+        
+						<img className="img-fluid" src={icon} />
+						<div className="improvementInfo">
+							<h4>{target["title"]}</h4>
+							<p>{format(target["incrementedPrice"])}<i class="fa fa-users" aria-hidden="true"></i> Owned : 100</p> 
+						</div>
+            <OverlayTrigger placement="top" overlay={tooltipUpdate}>
+						<div className="upgrade">
+              {Object.keys(target["upgrades"]).map((upgrade) => {
+                  return (
+                    <Upgrade
+                      autoclicker={this.props.autoclicker}
+                      upgrade={upgrade}
+                      handleUpgrade={this.handleUpgrade}
+                      zombies={this.props.zombies}
+                      key={upgrade}
+                    />
+                  )
+                })}
+							<i className="fa fa-arrow-up" aria-hidden="true"></i>
+              
+						</div>
+            </OverlayTrigger>
+					</div>
+          </OverlayTrigger>
+      </div>
+
+      /*
       <div className="container">
         <div className="card">
           <div className="card-content">
@@ -87,7 +129,7 @@ class Autoclicker extends Component {
             </ul>
           </div>
         </div>
-      </div>
+      </div>*/
     )
   }
 }

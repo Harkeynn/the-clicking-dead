@@ -59,7 +59,7 @@ class Sauvegarde extends Component {
   render() {
     return (
         <div id="modal">
-            <button data-target="modal1" className="btn modal-trigger" onClick={this.openModal}>Sauvegarder la partie</button>
+            <a data-target="modal1" className="btn modal-trigger" onClick={this.openModal}>Sauvegarder la partie</a>
             <Modal
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}

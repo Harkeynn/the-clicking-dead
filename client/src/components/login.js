@@ -10,7 +10,7 @@ const customStyles = {
 		left: 0,
 		right: 0,
 		bottom: 0,
-		backgroundColor: 'rgba(255, 255, 255, 0.75)'
+		backgroundColor: 'rgba(0, 0, 0, 0.5)'
 	},
 	content: {
 		top: '50%',
@@ -19,7 +19,10 @@ const customStyles = {
 		bottom: 'auto',
 		marginRight: '-50%',
 		width: '500px',
-		transform: 'translate(-50%, -50%)'
+		transform: 'translate(-50%, -50%)',
+		padding: '0px',
+		border: 'none',
+		boxShadow: '0 0 10px black'
 	},
 }
 
@@ -79,6 +82,57 @@ class Login extends Component {
 	render() {
 		return (
 			<div id="modal">
+				<a data-target="modal1" className="btn modal-trigger" onClick={this.openModal}>Log Out</a>
+				<Modal
+					isOpen={this.state.modalIsOpen}
+					onRequestClose={this.closeModal}
+					style={customStyles}
+					shouldCloseOnOverlayClick={false}
+					contentLabel="Login"
+				>
+					
+					<div class="modalContent">
+					<a class="closeModal" onClick={this.closeModal}></a>
+						<div className="modalHeader">
+							<h2>Login</h2>
+						</div>
+
+						<div className="modalBody">
+
+							<form onSubmit={this.handleSubmit}>
+								<input 
+									id="nickname"
+									placeholder="Username"
+									type="text"
+									className="validate"
+									value={this.state.nickname}
+									onChange={this.handleNicknameChange} 
+								/>
+								<br />
+								<input 
+									id="pass"
+									placeholder="Password"
+									type="password"
+									className="validate"
+									value={this.state.password}
+									onChange={this.handlePasswordChange} 
+								/>
+								<br />
+								
+								<button type="submit" name="action">Login</button>
+							</form>
+							<br/>
+							<Signin />
+						</div>
+					</div>
+
+							
+				</Modal>
+			</div>
+		
+		/*
+		<div id="modal">
+				<a data-target="modal1" className="btn modal-trigger" onClick={this.openModal}>Log Out</a>
 				<Modal
 					isOpen={this.state.modalIsOpen}
 					onRequestClose={this.closeModal}
@@ -123,6 +177,8 @@ class Login extends Component {
 					</div>
 				</Modal>
 			</div>
+		*/
+			
 		)
 	}
 }

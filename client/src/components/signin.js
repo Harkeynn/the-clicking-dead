@@ -10,7 +10,7 @@ const customStyles = {
 		left: 0,
 		right: 0,
 		bottom: 0,
-		backgroundColor: 'rgba(255, 255, 255, 0.75)'
+		backgroundColor: 'rgba(0, 0, 0, 0)'
 	},
 	content: {
 		top: '50%',
@@ -19,7 +19,10 @@ const customStyles = {
 		bottom: 'auto',
 		marginRight: '-50%',
 		width: '500px',
-		transform: 'translate(-50%, -50%)'
+		transform: 'translate(-50%, -50%)',
+		padding: '0px',
+		border: 'none',
+		boxShadow: '0 0 10px black'
 	},
 }
 
@@ -91,10 +94,76 @@ class Signin extends Component {
 	render() {
 
 		return (
+
 			<div id="modal">
-				<p className="right-align">
-					<a style={{ cursor: 'pointer' }} onClick={this.openModal}>SignIn</a>
-				</p>
+				<a data-target="modal1" className="btn modal-trigger" onClick={this.openModal}><b>No account yet ? Sign up !</b></a>
+				<Modal
+					isOpen={this.state.modalIsOpen}
+					onRequestClose={this.closeModal}
+					style={customStyles}
+					shouldCloseOnOverlayClick={false}
+					contentLabel="Signin"
+				>
+					<div class="modalContent">
+
+						<div className="modalHeader">
+							<h2>Sign in</h2>
+						</div>
+
+						<div className="modalBody">
+
+							<form onSubmit={this.handleSubmit}>
+								<input 
+									id="mail"
+									placeholder="mail"
+									type="email"
+									className="validate"
+									value={this.state.mail}
+									onChange={this.handleEmailChange} 
+								/>
+								<br />
+								<input 
+									id="nickname"
+									placeholder="username"
+									type="text"
+									className="validate"
+									value={this.state.nickname}
+									onChange={this.handleNicknameChange} 
+								/>
+								<br />
+								<input 
+									id="pass"
+									placeholder="password"
+									type="password"
+									className="validate"
+									value={this.state.password}
+									onChange={this.handlePasswordChange} 
+								/>
+								<br /><br/>
+								<input 
+									id="confirm"
+									placeholder="confirm password"
+									type="password"
+									className="validate"
+									value={this.state.passwordV}
+									onChange={this.handlePasswordVChange}
+								/>
+								<br />
+								
+								<button type="submit">Sign in</button>
+							</form>
+							<br/>
+							<a onClick={this.closeModal}><b>Already have an account ? Login !</b></a>
+						</div>
+					</div>
+
+							
+				</Modal>
+			</div>
+
+			/*<div id="modal">
+				<a style={{ cursor: 'pointer' }} onClick={this.openModal}><b>No account yet ? Sign up !</b></a>
+				
 				<Modal
 					isOpen={this.state.modalIsOpen}
 					onRequestClose={this.closeModal}
@@ -156,7 +225,7 @@ class Signin extends Component {
 						</form>
 					</div>
 				</Modal>
-			</div>
+			</div>*/
 		)
 	}
 }
