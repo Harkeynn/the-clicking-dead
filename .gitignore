@@ -1,3 +1,5 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
 # dependencies
 /client/node_modules
 /api/node_modules
@@ -22,4 +24,10 @@ npm-debug.log*
 /api/yarn-error.log*
 /client/yarn-debug.log*
 /client/yarn-error.log*
->>>>>>> develop
+
+#intellij
+./idea
+idea/*
+
+#conf
+db.conf.js

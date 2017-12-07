@@ -1,37 +1,54 @@
 const qs = require('querystring')
-const accountController = require('./controllers/account')
-const leaderboardController = require('./controllers/leaderboard')
-const cors = require('./middlewares/cors')
+    const accountController = require('./controllers/account')
+    const leaderboardController = require('./controllers/leaderboard')
+
 const express = require('express')
+const session  = require('express-session');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+var morgan = require('morgan');
+
+
+
 const app = express()
 const port = 1973
 
-app.use(cors)
+const passport = require('passport');
+const flash    = require('connect-flash');
 
-app.get('/accounts', (req, res) => {
-    return accountController.index(req, res)
-})
+app.use(cors());
 
-app.post('/accounts', (req, res) => {
-    return accountController.create(req, res)
-})
+// configuration ===============================================================
+// connect to our database
+require('./middlewares/passport')(passport); // pass passport for configuration
 
-app.get('/accounts/:nickname', (req, res) => {
-    return accountController.indexOne(req, res)
-})
+// set up our express application
+app.use(morgan('dev')); // log every request to the console
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 
-app.get('/leaderboard', (req, res) => {
-    return leaderboardController.index(req, res)
-})
 
-app.post('/leaderboard', (req, res) => {
-    return leaderboardController.create(req, res)
-})
+app.use(session({
+    secret: 'vidyapathaisalwaysrunning',
+    resave: true,
+    saveUninitialized: true
+} ));// session secret
 
-// app.use((req, res) => {
-//     res.sendStatus(404);
-// })
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
 
-app.listen(port, () => {
-    console.log('Listening on ', port)
-})
+
+// routes ======================================================================
+require('./routes')(app, passport); // load our routes and pass in our app and fully configured passport
+
+
+// launch ======================================================================
+app.listen(port);
+console.log('The magic happens on port ' + port);
+
+

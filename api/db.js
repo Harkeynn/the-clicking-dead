@@ -1,7 +1,9 @@
-const Sequelize = require('sequelize')
+const Sequelize = require('sequelize');
+const DBCONF = require('./db.conf');
 
-const db = new Sequelize({
-    dialect: 'sqlite',
+const db = new Sequelize(DBCONF.DB_NAME, DBCONF.DB_LOGIN, DBCONF.DB_PASSWORD, {
+    host:  DBCONF.DB_HOST,
+    dialect: DBCONF.DB_DIALECT,
 
     pool: {
         max: 5,
@@ -9,8 +11,11 @@ const db = new Sequelize({
         idle: 10000
     },
 
-    storage: 'db.sqlite'
-})
+    // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
+    operatorsAliases: false
+});
+
+
 
 db.authenticate().then(() => {
   console.log('Connection has been established successfully.')
@@ -19,4 +24,4 @@ db.authenticate().then(() => {
   console.error('Unable to connect to the database:', err)
 })
 
-module.exports = db
+module.exports = db;
