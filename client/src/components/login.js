@@ -44,27 +44,7 @@ class Login extends Component {
 	}
 
     componentDidMount() {
-
-
-
-
        this.testModal();
-
-
-
-        fetch('http://localhost:1973/userid')
-            .then((res) => {
-                return res.json()
-            })
-            .then(jsonData => {
-                userid = jsonData.userid;
-                console.log("result " + userid);
-
-
-            });
-
-
-
     }
     openModal() {
         this.setState({ modalIsOpen: true })
@@ -89,6 +69,17 @@ class Login extends Component {
 
 	closeModal() {
 		this.setState({ modalIsOpen: false })
+
+        fetch('http://localhost:1973/userid')
+		.then((res) => {
+			return res.json()
+		})
+		.then(jsonData => {
+			let userid = jsonData.userid;
+			console.log("result " + userid);
+
+
+		});
 	}
 
 	handleNicknameChange = (e) => {
