@@ -1,9 +1,9 @@
 const Sequelize = require('sequelize');
 const DBCONF = require('./db.conf');
 
-const db = new Sequelize(DBCONF.DB_NAME, DBCONF.DB_LOGIN, DBCONF.DB_PASSWORD, {
-    host:  DBCONF.DB_HOST,
-    dialect: DBCONF.DB_DIALECT,
+const db = new Sequelize(DBCONF.database, DBCONF.user, DBCONF.password, {
+    host:  DBCONF.host,
+    dialect: DBCONF.dialect,
 
     pool: {
         max: 5,

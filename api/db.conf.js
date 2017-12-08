@@ -1,19 +1,9 @@
 const databaseConf = {
-    DB_NAME: "testpassport2",
-    DB_LOGIN: "root",
-    DB_PASSWORD: "",
-    DB_HOST: "localhost",
-    DB_DIALECT: "mysql",
-
-    'connection': {
-        'host': 'localhost',
-        'user': 'root',
-        'password': ''
-    },
-    'database': 'testpassport2',
-    'users_table': 'users'
-
-
+    database: "clickingdeadv2",
+    user: "root",
+    password: "root",
+    host: "localhost",
+    dialect: "mysql"
 };
 
 module.exports = databaseConf;

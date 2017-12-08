@@ -1,16 +1,25 @@
 const db = require('../db.js')
 const Sequelize = require('sequelize')
-const passwordHash = require('password-hash')
+var bcrypt = require('bcrypt-nodejs');
 
-const Account = db.define('Account', {
-	email: {
-		type: Sequelize.STRING
-	},
+const Account = db.define('account', {
 	nickname: {
 		type: Sequelize.STRING
 	},
 	password: {
 		type: Sequelize.STRING
+	},
+	email: {
+		type: Sequelize.STRING
+	},
+	nbzombies: {
+		type: Sequelize.INTEGER
+	},
+	nbhumains: {
+		type: Sequelize.INTEGER
+	},
+	score: {
+		type: Sequelize.INTEGER
 	}
 })
 
@@ -20,9 +29,13 @@ Account.sync().then(() => {
 		.then(account => {
 			if (account === null) {
 				Account.create({
-					email: 'admin@ad.min',
 					nickname: 'Admin',
-					password: passwordHash.generate('Admin')
+					password: bcrypt.hashSync('Admin', null, null),
+					email: 'admin@ad.min',
+					nbzombies: 100000,
+					nbhumains: 0,
+					score: 0,
+					
 				})
 			}
 		})
