@@ -48,6 +48,15 @@ module.exports = function(app, passport) {
 
     })
 
+
+
+    app.get('/userid', (req, res) => {
+        let userData = require('./userdata');
+        return res.json({
+            userid: userData.id
+        })
+    })
+
     //process the login form
     app.post('/game', passport.authenticate('local-login', {
             successRedirect : '/game', // redirect to the secure profile section

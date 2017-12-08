@@ -44,7 +44,27 @@ class Login extends Component {
 	}
 
     componentDidMount() {
+
+
+
+
        this.testModal();
+
+
+
+        fetch('http://localhost:1973/userid')
+            .then((res) => {
+                return res.json()
+            })
+            .then(jsonData => {
+                userid = jsonData.userid;
+                console.log("result " + userid);
+
+
+            });
+
+
+
     }
     openModal() {
         this.setState({ modalIsOpen: true })
