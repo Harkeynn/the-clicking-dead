@@ -1,4 +1,4 @@
- 	import React, { Component } from 'react'
+import React, { Component } from 'react'
 import Modal from 'react-modal'
 import Signin from './signin'
 const passwordHash = require('password-hash')
@@ -93,42 +93,7 @@ class Login extends Component {
 		})
 	}
     handleSubmit = (e) => {
-		// e.preventDefault()
-		// fetch(`http://localhost:1973/game`, {
-		// 	mode: 'cors',
-		// 	method: 'POST',
-		// 	headers: {
-		// 		'Access-Control-Allow-Origin': '*',
-		// 		'Content-Type': 'application/json'
-		// 	},
-		// 	body: {
-		// 		"username": this.state.username,
-		// 		"password": this.state.password
-		// 	}
-		// })
-		// .then((res) => {
-		// 	console.log('MAXXX : ' + res);
-    //   return res.json()
-    // })
-    // .then(jsonData => {
-		// 	if(jsonData === null) throw new Error("This account doesn't exist !!")
-		// 	if(passwordHash.verify(this.state.password, jsonData.password)){
-		// 		this.closeModal()
-		// 	}else{
-		// 		throw new Error("Bad nick/pw")
-		// 	}
-		// })
-		// .catch(err => {
-		// 	console.log(err)
-		// })
-
-        console.log("openModal");
-
-        console.log(this.testModal());
-
-
         e.preventDefault()
-
         fetch('http://localhost:1973/game', {
             method: 'POST',
             headers: {
@@ -199,10 +164,6 @@ class Login extends Component {
 							
 				</Modal>
 			</div>
-		
-
-
-			
 		)
 	}
 }

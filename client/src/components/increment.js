@@ -51,22 +51,6 @@ class Increment extends Component {
       <div className="zombieImg" style={{backgroundImage : "url(" + img + ")"}} onClick={this.handleIncrement}>
 
       </div>
-      /*<div className="container">
-        <div className="col s12">
-          <div className="card">
-            <div className="card-content">
-              <div className="card-title">
-                Zombies
-                <span className="right">ZPS : {this.props.zps}</span>
-              </div>
-              <p>{this.props.zombies}</p>
-            </div>
-            <div className="card-action">
-              <button className="btn" onClick={this.handleIncrement}>Moar zombies</button>
-            </div>
-          </div>
-        </div>
-      </div>*/
     )
   }
 }

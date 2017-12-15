@@ -1,6 +1,6 @@
 const qs = require('querystring')
-    const accountController = require('./controllers/account')
-    const leaderboardController = require('./controllers/leaderboard')
+const accountController = require('./controllers/account')
+const leaderboardController = require('./controllers/leaderboard')
 
 const express = require('express')
 const session  = require('express-session');
@@ -50,5 +50,7 @@ require('./routes')(app, passport); // load our routes and pass in our app and f
 // launch ======================================================================
 app.listen(port);
 console.log('The magic happens on port ' + port);
+
+module.exports = app
 
 

@@ -2,7 +2,7 @@ const db = require('../db.js')
 const Sequelize = require('sequelize')
 var bcrypt = require('bcrypt-nodejs');
 
-const Account = db.define('account', {
+const Account = db.define('accounts', {
 	nickname: {
 		type: Sequelize.STRING
 	},

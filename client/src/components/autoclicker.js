@@ -14,6 +14,7 @@ class Autoclicker extends Component {
       percent: 0,
     }
   }
+  
 
 
   //set price to base price * 1.15^N (N=number of autoclicker(s))
@@ -97,39 +98,6 @@ class Autoclicker extends Component {
 					</div>
           </OverlayTrigger>
       </div>
-
-      /*
-      <div className="container">
-        <div className="card">
-          <div className="card-content">
-            <div className="card-title activator">
-              {target["title"]}
-              <span className="right">{format(target["incrementedPrice"])}</span>
-            </div>
-            <span className="right">x{target["number"]}({percent}%)</span>
-            <p>{target["description"]}</p>
-          </div>
-          <div className="card-action">
-            <button className={this.activator(this.incrementPrice(target["price"])) ? "btn" : "btn disabled"} onClick={this.handleBuy}>Buy</button>
-          </div>
-          <div className="card-reveal">
-            <span className="card-title">{target["title"]}</span>
-            <ul className="collection">
-              {Object.keys(target["upgrades"]).map((upgrade) => {
-                return (
-                  <Upgrade
-                    autoclicker={this.props.autoclicker}
-                    upgrade={upgrade}
-                    handleUpgrade={this.handleUpgrade}
-                    zombies={this.props.zombies}
-                    key={upgrade}
-                  />
-                )
-              })}
-            </ul>
-          </div>
-        </div>
-      </div>*/
     )
   }
 }
