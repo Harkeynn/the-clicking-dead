@@ -29,6 +29,7 @@ Account.sync().then(() => {
 		.then(account => {
 			if (account === null) {
 				Account.create({
+					id: 1,
 					nickname: 'Admin',
 					password: bcrypt.hashSync('Admin', null, null),
 					email: 'admin@ad.min',
