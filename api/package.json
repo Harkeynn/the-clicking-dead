@@ -3,13 +3,35 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "nyc": {
+    "require": [
+      "babel-register"
+    ],
+    "sourceMap": false,
+    "instrument": false
+  },
   "scripts": {
     "start": "nodemon index.js",
-    "test": "mocha test/**/*.spec.js"
+    "test": "cross-env NODE_ENV=test nyc mocha test/**/*.spec.js --exit --timeout=20000"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ],
+    "env": {
+      "test": {
+        "plugins": [
+          "istanbul"
+        ]
+      }
+    }
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-plugin-istanbul": "^4.1.5",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
     "bcrypt": "^1.0.3",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
@@ -17,12 +39,15 @@
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
+    "cross-env": "^5.1.1",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
+    "istanbul": "^0.4.5",
     "morgan": "^1.9.0",
     "mysql": "^2.15.0",
     "mysql2": "^1.5.0",
     "nodemon": "^1.12.1",
+    "nyc": "^11.3.0",
     "passport": "^0.2.2",
     "passport-local": "^1.0.0",
     "password-hash": "^1.2.2",
