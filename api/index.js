@@ -9,8 +9,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 var morgan = require('morgan');
 
-
-
 const app = express()
 const port = 1973
 
