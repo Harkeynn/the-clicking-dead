@@ -78,11 +78,14 @@ class Leaderboard extends Component {
 		}
 
 		scores.sort( (a,b) => b-a ) // Sort scores
+
 		let scoresSliced = scores.slice(0, 10) // Keep 10 first scores
+		//console.log(scoresSliced)
 
 		for(let i = 0; i < scoresSliced.length; i++) { // Get index of 10 best users
 			indexScores.push(findIndex(this.state.dataUsers, ["score", scoresSliced[i]]))
 			scoresSliced.splice(i, 1)
+			//console.log(scoresSliced)
 			topPlayers.push(this.state.dataUsers[indexScores[i]])
 			indexScores = []
 			i--
@@ -93,7 +96,6 @@ class Leaderboard extends Component {
 			playerIdx = scores.indexOf(player[0].score)
 		}
 
-		console.log(topPlayers)
 		return topPlayers;
 	}
 
@@ -130,7 +132,7 @@ class Leaderboard extends Component {
 							 		})}
 
 									{findIndex(leaderboard, ["id", this.props.userId]) === -1 ? <li id="player" className="notBest">
-										<span>{playerIdx + 1}.</span><p className="pseudo">{player[0].nickname}</p> <p>{player[0].score}</p>
+										<span>{playerIdx + 2}.</span><p className="pseudo">{player[0].nickname}</p> <p>{player[0].score}</p>
 									</li> : null }
 
 								</ul> : null }

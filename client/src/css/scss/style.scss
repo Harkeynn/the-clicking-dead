@@ -479,6 +479,17 @@ select:-webkit-autofill:focus {
 		justify-content: center;
 	}
 
+	.info{
+		border-bottom: 1px solid rgba(0,0,0,0.2);
+		margin: 15px 10%;
+		padding: 7px;
+	}
+	.attackInfo{
+		height: 21px;
+		color: #{$red};
+		margin-bottom: 25px !important;
+	}
+
 	#worldMap { position: relative; }
 
 	.map {
@@ -489,8 +500,6 @@ select:-webkit-autofill:focus {
 		margin: auto;
 	}
 
-	.mapAll{ margin-top: 30px; }
-	.infoMap{ margin-bottom: 20px; }
 
 	#stats {
 		@include flex(2);

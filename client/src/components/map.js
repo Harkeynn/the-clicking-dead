@@ -11,14 +11,15 @@ import { log } from 'util';
 var shuffle = require('shuffle-array')
 
 const continents = [
-  ["Europe", 743.1],
   ["Oceania", 40.5],
+  ["Europe", 743.1],
+
   ["South America", 422.5],
   ["Asia", 4436],
   ["North America", 579],
   ["Africa", 1216],
 ]
-shuffle(continents)
+//shuffle(continents)
 
 const init = [0,0,0,0,0,0,0,0]
 let [ percentOpacityEurope, percentOpacityAsia, percentOpacityNorthAmerica, percentOpacitySAmerica,
@@ -82,8 +83,6 @@ zombiesInvasion(continent){
   render(){
 
 
-    let humanAttack = this.props.attackHuman
-    if(humanAttack !== null) { setTimeout(function(){ humanAttack = null; }, 20000); }
 
 
     /*if (nbZombiesContinent < 0 && nContinent > 0) { // Retrograde continent
@@ -91,7 +90,7 @@ zombiesInvasion(continent){
       this.zombiesInvasion(nContinent)
     } else */ if (nbZombiesContinent < 100) {
       this.zombiesInvasion(nContinent)
-    } else if (continents.length < nContinent){ // Pourcentage supérieur ou égal à 100%
+    } else if (nContinent < continents.length ){ // Pourcentage supérieur ou égal à 100%
         nContinent++
         this.zombiesInvasion(nContinent)
     }
@@ -104,11 +103,6 @@ zombiesInvasion(continent){
 
     return(
         <div className="mapAll">
-          <div className="infoMap">
-            <p className="infoMap">Zombies are invaded {continentInvaded} at {nbZombiesContinent}%</p>
-            <p className="infoMap">{humanAttack}</p>
-          </div>
-
             <div id="worldMap">
                 <div><img src={mappAll} alt="All" /></div>
                 <div id="southAmerica" style={{opacity : percentOpacitySAmerica}} className="map"><img src={mappSouthAmeria} alt="South America" /></div>

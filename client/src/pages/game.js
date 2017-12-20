@@ -10,6 +10,7 @@ import Profile from '../components/profile'
 import Sauvegarde from '../components/sauvegarde'
 import Achievement from '../components/achievement'
 import Map from '../components/map'
+import {nbZombiesContinent} from '../components/map'
 import Leaderboard from '../components/leaderboard'
 import SaveStats from '../api/saveStats'
 //STYLES
@@ -29,11 +30,14 @@ import GameCtrl from '../api/gameController'
 
 const {saveInterval} = require( '../save.conf.json')
 
-
+let destroyZombies = 0
 let nameContinent
 const riposte = [
-  ["Les humains attaquent", 100],
-  ["Vaccin", 200]
+  ["NEUTRE", 0],
+  ["Humans put infected in quarantine", 5],
+  ["Humans attack", 20],
+  ["Humans found a cure", 50],
+  ["Humans drop a nuclear bomb", 200],
 ]
 let randomAttack
 let imgEnd
@@ -95,8 +99,8 @@ class Game extends Component {
         .then(jsonData => {
           this.setState ({
             username : jsonData.nickname,
-            zombies: jsonData.nbzombies,
-            humans: jsonData.nbhumains,
+            /*zombies: jsonData.nbzombies,
+            humans: jsonData.nbhumains,*/
             score: jsonData.score
           })
         })
@@ -112,7 +116,6 @@ class Game extends Component {
     })
 
     setInterval(() => this.saveUserStats(), saveInterval)
-    document.title = format(Math.floor(this.state.zombies)) + " zombies - The Clicking Dead"
     this.getScore()
   }
 
@@ -177,7 +180,6 @@ class Game extends Component {
     this.setState({
       score: Math.round(score)
     })
-    console.log(this.state.score)
   }
 
   //Adds the total of zombies/sec to zombies every 0.5 seconds and update the page title
@@ -196,36 +198,36 @@ class Game extends Component {
     nameContinent = nContinent
 	}
 
-  humanFighting(interval) { // Riposte des humains
+  humanFighting() { // Riposte des humains
 
     this.setState({ areFighting: true, })
-    let destroyZombies = 1;
 
     this.humansTimer = setInterval(() => {
 
-      if(this.state.zombies < 50) {
-        destroyZombies = 1;
+      if(this.state.zombies < 100) {
+        destroyZombies = 0.5
       }
 
-      if(this.state.zombies > 50) {
-        destroyZombies = 3;
-        clearInterval(this.humansTimer);
-        this.humanFighting(2000);
+      if(this.state.zombies > 100) {
+        destroyZombies = 1
+        let test = Math.floor(Math.random()*30)
+        if(1 === test) {
+          randomAttack = Math.floor(Math.random()*4)
+          destroyZombies = riposte[randomAttack][1]
+        }
       }
 
-      if(1 === Math.floor(Math.random()*30)) {
-        randomAttack = Math.floor(Math.random()*2);
-        destroyZombies = riposte[randomAttack][1];
+      if(this.state.zombies > 500) {
+        destroyZombies = 10
+        if(1 === Math.floor(Math.random()*100)) {
+          destroyZombies = riposte[4][1];
+        }
       }
-
-      clearInterval(this.humansTimer);
-
       this.setState({
         zombies: Math.floor(this.state.zombies) - destroyZombies
       })
-    }, interval)
+    }, 1000)
 
-    clearInterval(this.humansTimer);
   }
 
   winLose() {
@@ -240,21 +242,31 @@ class Game extends Component {
 
   render() {
 
-    !this.state.winLose ? this.winLose() : null
-
     let zombiesTop = format(Math.floor(this.state.zombies))
     document.title = zombiesTop < 0 ? "You lost - The Clicking Dead" : zombiesTop + " zombies - The Clicking Dead"
 
     let zombiesInt = Math.floor(this.state.zombies)
     let humans = format(Math.floor(this.state.humans))
     let humansAll = Math.floor(this.state.humans).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+
     const tooltipAllHumans = (
       <Tooltip id="tooltip">{humansAll}</Tooltip>
-    );
+    )
 
-    if(!this.state.areFighting && zombiesInt === 100 && !this.state.winLose) { // Humans are fighting back
-      clearInterval(this.humansTimer)
-      this.humanFighting(1000)
+    if(!this.state.areFighting && zombiesInt === 10 && !this.state.winLose) { // Humans are fighting back
+      this.humanFighting()
+    }
+
+    let humanAttack = randomAttack ? riposte[randomAttack][0] : null
+    let lostZombies = randomAttack ? riposte[randomAttack][1] : null
+    let attack = ""
+    if(humanAttack !== null) {
+      attack = humanAttack + ", you have lost " + lostZombies + " zombies"
+       setTimeout(function(){ attack = "" }, 3000)
+    }
+
+    if(!this.state.winLose){
+      this.winLose()
     }
 
     return ( <div>
@@ -266,11 +278,7 @@ class Game extends Component {
 					shouldCloseOnOverlayClick={false}
 					contentLabel="Login"
 				>
-
             <img src={imgEnd}/>
-
-
-
 				</Modal>
 			</div>
 
@@ -313,11 +321,18 @@ class Game extends Component {
             </Col>
             <Col md="6" id="mapZone">
               <img className="img-fluid" src={logo} alt="Logo" title="Logo" />
+              <Row className="info">
+                <Col md="4" className="left"> {nameContinent} {nbZombiesContinent}%</Col>
+                <Col md="4" className="center">Infection : {Math.floor(this.state.autoClickTotal* 10) / 10} /s</Col>
+                <Col md="4" className="right">Resistance : -{destroyZombies} /s</Col>
+              </Row>
+              <p className="attackInfo">{attack}</p>
 
               <Map
                 zombies = {zombiesInt}
                 continentName = {this.continentName}
                 attackHuman = {randomAttack ? riposte[randomAttack][0] : null}
+                lostZombies = {randomAttack ? riposte[randomAttack][1] : null}
               />
 
               <Row id="stats">
@@ -352,7 +367,6 @@ class Game extends Component {
                   )
                 })}
               </Scrollbars>
-              <p id="totalAutoClick">Auto generated zombies : {this.state.autoClickTotal}</p>
             </Col>
           </Row>
           <Achievement
