@@ -95,8 +95,9 @@ class Profile extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    alert("fonctionne");
     updatePassword.updatePaswword(this.state.passone);
+    
+    this.setState({messageChangePassword: "The Password has been correctly modified"})
 }
 
   render() {
