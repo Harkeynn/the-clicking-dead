@@ -23,6 +23,9 @@ import { setInterval } from 'timers';
 import GameCtrl from '../api/gameController'
 
 
+const {saveInterval} = require( '../save.conf.json')
+
+
 let nameContinent
 const riposte = [
   ["Les humains attaquent", 100],
@@ -58,8 +61,6 @@ class Game extends Component {
       if (this.state.userId) {
         GameCtrl.getUserAccount(this.state.userId)
         .then(jsonData => {
-          console.log('ACCOUNTTTTT INFOOOSSSSSS')
-          console.log(jsonData)
           this.setState ({
             username : jsonData.nickname,
             zombies: jsonData.nbzombies,
@@ -78,7 +79,7 @@ class Game extends Component {
       })
     })
 
-    setInterval(() => this.saveUserStats(), 10000)
+    setInterval(() => this.saveUserStats(), saveInterval)
     document.title = format(Math.floor(this.state.zombies)) + " zombies - The Clicking Dead"
     this.getScore()
   }
