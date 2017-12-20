@@ -1,0 +1,217 @@
+-- phpMyAdmin SQL Dump
+-- version 4.6.4
+-- https://www.phpmyadmin.net/
+--
+-- Client :  localhost:3306
+-- Généré le :  Mer 20 Décembre 2017 à 12:33
+-- Version du serveur :  5.6.33
+-- Version de PHP :  7.0.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Base de données :  `clickingdeadv2`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `accountachievement`
+--
+
+CREATE TABLE `accountachievement` (
+  `iduser` int(10) NOT NULL,
+  `idachievement` int(10) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `accountachievement`
+--
+
+INSERT INTO `accountachievement` (`iduser`, `idachievement`, `createdAt`, `updatedAt`) VALUES
+(1, 1, '2017-12-20 09:39:39', '2017-12-20 09:39:39'),
+(1, 2, '2017-12-20 11:17:42', '2017-12-20 11:17:42'),
+(1, 4, '2017-12-20 10:13:09', '2017-12-20 10:13:09'),
+(1, 5, '2017-12-20 11:28:25', '2017-12-20 11:28:25'),
+(1, 6, '2017-12-20 11:29:12', '2017-12-20 11:29:12'),
+(1, 7, '2017-12-20 11:28:55', '2017-12-20 11:28:55'),
+(1, 8, '2017-12-20 10:14:35', '2017-12-20 10:14:35'),
+(1, 9, '2017-12-20 11:25:21', '2017-12-20 11:25:21'),
+(1, 19, '2017-12-20 09:39:45', '2017-12-20 09:39:45'),
+(1, 20, '2017-12-20 09:48:10', '2017-12-20 09:48:10'),
+(1, 21, '2017-12-20 09:48:23', '2017-12-20 09:48:23'),
+(1, 22, '2017-12-20 09:45:48', '2017-12-20 09:45:48'),
+(2, 1, '2017-12-19 11:49:36', '2017-12-19 11:49:36'),
+(2, 19, '2017-12-19 12:02:20', '2017-12-19 12:02:20'),
+(2, 20, '2017-12-19 12:03:55', '2017-12-19 12:03:55'),
+(2, 21, '2017-12-19 12:03:57', '2017-12-19 12:03:57'),
+(2, 22, '2017-12-19 12:03:59', '2017-12-19 12:03:59'),
+(3, 1, '2017-12-18 15:52:51', '2017-12-18 15:52:51'),
+(3, 19, '2017-12-19 20:44:52', '2017-12-19 20:44:52'),
+(3, 20, '2017-12-19 20:44:59', '2017-12-19 20:44:59'),
+(3, 21, '2017-12-19 20:47:10', '2017-12-19 20:47:10'),
+(11, 1, '2017-12-19 11:47:30', '2017-12-19 11:47:30');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `accounts`
+--
+
+CREATE TABLE `accounts` (
+  `id` int(10) NOT NULL,
+  `nickname` varchar(20) NOT NULL,
+  `password` char(60) NOT NULL,
+  `email` varchar(60) NOT NULL,
+  `nbzombies` bigint(11) NOT NULL,
+  `nbhumains` bigint(11) NOT NULL,
+  `score` double NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `accounts`
+--
+
+INSERT INTO `accounts` (`id`, `nickname`, `password`, `email`, `nbzombies`, `nbhumains`, `score`, `createdAt`, `updatedAt`) VALUES
+(1, 'Admin', '$2a$10$IMv8PrjnvZJvr71rS3Xm4ewpXprZw6ohs6LhqlohkB/93OubXuHSa', 'admin@ad.min', 100000, 0, 5, '2017-12-08 14:57:53', '2017-12-08 14:57:53'),
+(2, 'Test', '$2a$10$WhLf42wWV7yjevB19dgzPezdUwBteAwqHPPhxCSQPM4irj/6eY7sy', '', 0, 0, 10, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 'Syn', '$2a$10$PNGlXLPPDuVpWUY8q1ZbqeBZG5r/sgDui8zRhIFAVGr5x.C0bObzq', '', 0, 0, 37, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, 'Testscore', '$2a$10$/rCzzYkqI3n52pE3StTxNeEmlyuTA958hZt/C1BHQHbmVsA4QpLYi', '', 0, 0, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(5, 'test1', '$2a$10$WHpZSFCik6TPk/L.WuOpcuPYe5c7sRAjKN.6AmUPxCt1hLrNxfPSG', '', 0, 0, 23, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(6, 'Test2', '$2a$10$QfUb.0kweBJt.kBcG5QF0eWA8M/yZDCu/MV9wPvEopVIxq39jOJwi', '', 0, 0, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(7, 'test3', '$2a$10$AyKYJQwiLcr.pEtXtk4dReSeTnDKkF6ApUKXlq4HOq8mBeGU7Zz6m', '', 0, 0, 17, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(8, 'test4', '$2a$10$9YYEuJp0g811vVb3KSim6uwYKRfPQe0gk.TdwsSEuSZqvc7tvPV.G', '', 0, 0, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(9, 'test5', '$2a$10$E7pzvxhGANwO3jbYjTCZ8Ohq7Kr3RV0oZtABSuqWc8x0wL5U9DxEC', '', 0, 0, 55, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(10, 'test6', '$2a$10$Qy7kLahp6uL4I0TVSmHzbuolyxh9JDsgSLdELt9SABnP5fVoz2ce2', '', 0, 0, 51, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(11, 'test8', '$2a$10$C0y7qcREYbjExV8yXz3FgOl9fXduVTNFAzc3KbosMpStnJulPViPu', '', 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(12, 'test9', '$2a$10$d/jPLIRissOKuJoVHBW9jeGF.ihL5wSkMcAUgWsObrvNToGLVcpVK', '', 0, 0, 15, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `achievement`
+--
+
+CREATE TABLE `achievement` (
+  `id` int(10) NOT NULL,
+  `libelle` varchar(40) NOT NULL,
+  `description` varchar(200) NOT NULL,
+  `image` varchar(120) NOT NULL,
+  `points` int(11) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `achievement`
+--
+
+INSERT INTO `achievement` (`id`, `libelle`, `description`, `image`, `points`, `createdAt`, `updatedAt`) VALUES
+(1, 'First Bite', 'first human infected', 'https://img15.hostingpics.net/pics/455947firstBite.png', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'One for all', 'first continent totally infected', 'https://img15.hostingpics.net/pics/168069oneForAll.png', 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 'A zombie to rule them all', 'All humans infected', '', 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, 'Zombrexit', 'All Europe infected', 'https://img15.hostingpics.net/pics/421689mapeurope.png', 4, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(5, 'Tentacle Madness', 'All Asia infected', 'https://img15.hostingpics.net/pics/729630mapasia.png', 5, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(6, 'Fast Food', 'All North America infected', 'https://img15.hostingpics.net/pics/734540mapNAmerica.png', 6, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(7, 'No more hunger', 'All Africa infected', 'https://img15.hostingpics.net/pics/944262mapafrica.png', 7, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(8, 'Welcome to nopeland !', 'All Oceania infected', 'https://img15.hostingpics.net/pics/701412mapoceania.png', 8, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(9, 'The wall is broken', 'All South America infected', 'https://img15.hostingpics.net/pics/879740mapSAmerica.png', 10, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(10, 'Click and Furious', '10 clicks in one second', '', 11, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(11, 'Do you know how fast you were clicking ?', '100 clicks in one second', '', 12, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(12, '1337 h4x0r', '1000 clicks in one second', '', 13, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(13, 'Karma is a bitch', 'Human are taking over your zombies', 'https://img15.hostingpics.net/pics/486896humankarma.png', 14, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(14, 'Evolution is a lie', 'Upgrade your zombies for the first time', 'https://img15.hostingpics.net/pics/675957amelioevolution.png', 15, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(15, 'The game, you just lost it', 'Lose against the humans', '', 16, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(16, 'U n00b', 'Lose on the first continent', '', 17, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(17, 'Veggie', 'Win without eating anybody', '', 18, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(18, 'Best username ever', 'create a profile with a username like xX_foobar_Xx', '', 19, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(19, 'Squad', '10 people infected', 'https://img15.hostingpics.net/pics/445334squad.png', 20, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(20, 'Beginning of Invasion', '50 people infected', 'https://img15.hostingpics.net/pics/935826invasion.png', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(21, 'Creation of an army', '100 people infected', 'https://img15.hostingpics.net/pics/878751army.png', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(22, 'Purge', '500 people infected', 'https://img15.hostingpics.net/pics/124191purge.png', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Leaderboards`
+--
+
+CREATE TABLE `Leaderboards` (
+  `id` int(11) NOT NULL,
+  `nickname` varchar(255) DEFAULT NULL,
+  `score` int(11) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `Leaderboards`
+--
+
+INSERT INTO `Leaderboards` (`id`, `nickname`, `score`, `createdAt`, `updatedAt`) VALUES
+(1, 'Nereyde', 888888888, '2017-12-08 14:57:53', '2017-12-08 14:57:53'),
+(2, 'Jeremy', 999999999, '2017-12-08 14:57:53', '2017-12-08 14:57:53');
+
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `accountachievement`
+--
+ALTER TABLE `accountachievement`
+  ADD PRIMARY KEY (`iduser`,`idachievement`),
+  ADD KEY `idachievement` (`idachievement`);
+
+--
+-- Index pour la table `accounts`
+--
+ALTER TABLE `accounts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `achievement`
+--
+ALTER TABLE `achievement`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `Leaderboards`
+--
+ALTER TABLE `Leaderboards`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `accounts`
+--
+ALTER TABLE `accounts`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT pour la table `achievement`
+--
+ALTER TABLE `achievement`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+--
+-- AUTO_INCREMENT pour la table `Leaderboards`
+--
+ALTER TABLE `Leaderboards`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `accountachievement`
+--
+ALTER TABLE `accountachievement`
+  ADD CONSTRAINT `accountachievement_ibfk_1` FOREIGN KEY (`iduser`) REFERENCES `accounts` (`id`),
+  ADD CONSTRAINT `accountachievement_ibfk_2` FOREIGN KEY (`idachievement`) REFERENCES `achievement` (`id`);
