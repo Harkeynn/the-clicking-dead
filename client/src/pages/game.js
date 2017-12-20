@@ -20,6 +20,7 @@ import { Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 //IMAGES
 import logo from '../img/design/logo.png'
 import { setInterval } from 'timers';
+import GameCtrl from '../api/gameController'
 
 
 let nameContinent
@@ -49,34 +50,28 @@ class Game extends Component {
   componentDidMount() {
 
     // FETCH USER ID IN JSON
-    fetch('http://localhost:1973/userid')
-    .then((res) => {
-      return res.json()
-    })
+    GameCtrl.getUser()
     .then(jsonData => {
       let userid = jsonData.userid[0];
       this.setState({ userId: userid, })
 
       if (this.state.userId) {
-        // FETCH CONNECTED USER
-        fetch('http://localhost:1973/accounts/'+this.state.userId+'')
-        .then((res) => {
-          if (!res.ok) { throw Error(res.statusText);}
-          return res.json()
-        })
+        GameCtrl.getUserAccount(this.state.userId)
         .then(jsonData => {
+          console.log('ACCOUNTTTTT INFOOOSSSSSS')
+          console.log(jsonData)
           this.setState ({
             username : jsonData.nickname,
+            zombies: jsonData.nbzombies,
+            humans: jsonData.nbhumains,
+            score: jsonData.score
           })
         })
       }
     })
 
     // FETCH ACHIEVEMENT
-    fetch('http://localhost:1973/achievement')
-    .then((res) => {
-      return res.json()
-    })
+    GameCtrl.getAchievements()
     .then(jsonData => {
       this.setState ({
         achievements : jsonData,
