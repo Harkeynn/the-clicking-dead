@@ -171,7 +171,6 @@ class Game extends Component {
 
     this.setState({ areFighting: true, })
 
-    let interval = 1000;
     let destroyZombies = 1;
 
     this.humansTimer = setInterval(() => {
@@ -307,7 +306,7 @@ class Game extends Component {
         </div>
       </div> }
     </div> )
-    )
+
   }
 }
 

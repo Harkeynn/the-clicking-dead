@@ -83,6 +83,7 @@ class Login extends Component {
 		.then(jsonData => {
 			let userid = jsonData.userid;
 		});
+		window.location.reload();
 	}
 
 	handleNicknameChange = (e) => {
