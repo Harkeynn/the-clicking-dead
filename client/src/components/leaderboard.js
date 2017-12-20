@@ -52,11 +52,23 @@ class Leaderboard extends Component {
 		})
 	}
 
-  openModal() { this.setState({modalIsOpen: true}) }
+  openModal() {
+		this.setState({modalIsOpen: true})
+		fetch('http://localhost:1973/accounts/')
+		.then((res) => {
+			return res.json()
+		})
+		.then(jsonData => {
+			this.setState ({
+				dataUsers : jsonData,
+			})
+		})
+ }
   closeModal() { this.setState({modalIsOpen: false}) }
 
 
 	getLeaderboard() {
+
 		let scores = []
 		let indexScores = []
 		let topPlayers = []
@@ -81,11 +93,16 @@ class Leaderboard extends Component {
 			playerIdx = scores.indexOf(player[0].score)
 		}
 
+		console.log(topPlayers)
 		return topPlayers;
 	}
 
 
   render() {
+
+		let leaderboard = [];
+		this.state.dataUsers && this.props.userId > 0 ? leaderboard = this.getLeaderboard() : null;
+
     return (
       <div id="modal">
 				<a data-target="modal1" className="btn modal-trigger" onClick={this.openModal}>Leaderboard</a>
@@ -106,13 +123,13 @@ class Leaderboard extends Component {
 
 							  {this.state.dataUsers && this.props.userId > 0 ? <ul>
 
-									{this.getLeaderboard().map((val, i) => {
+									{leaderboard.map((val, i) => {
 										return (<li key={i} id={val.id === this.props.userId ? "player" : null }>
 											<p className="pseudo">{val.nickname}</p> <p>{val.score}</p>
 										</li> )
 							 		})}
 
-									{findIndex(this.getLeaderboard(), ["id", this.props.userId]) === -1 ? <li id="player" className="notBest">
+									{findIndex(leaderboard, ["id", this.props.userId]) === -1 ? <li id="player" className="notBest">
 										<span>{playerIdx + 1}.</span><p className="pseudo">{player[0].nickname}</p> <p>{player[0].score}</p>
 									</li> : null }
 

@@ -75,7 +75,6 @@ zombiesInvasion(continent){
     }
 
     this.props.continentName(continents[nContinent][0])
-
 }
 
 
@@ -87,20 +86,26 @@ zombiesInvasion(continent){
     if(humanAttack !== null) { setTimeout(function(){ humanAttack = null; }, 20000); }
 
 
-    if (nbZombiesContinent < 0 && nContinent > 0) { // Pourcentage inférieur à 0%
+    /*if (nbZombiesContinent < 0 && nContinent > 0) { // Retrograde continent
       nContinent--
       this.zombiesInvasion(nContinent)
-    } else if (nbZombiesContinent < 100) {
+    } else */ if (nbZombiesContinent < 100) {
       this.zombiesInvasion(nContinent)
-    } else { // Pourcentagesupérieur ou égal à 100%
+    } else if (continents.length < nContinent){ // Pourcentage supérieur ou égal à 100%
         nContinent++
         this.zombiesInvasion(nContinent)
+    }
+
+    if (nbZombiesContinent < 0) {
+      nbZombiesContinent = 0
+    } else if (nbZombiesContinent > 100){
+      nbZombiesContinent = 100
     }
 
     return(
         <div className="mapAll">
           <div className="infoMap">
-            <p className="infoMap">Zombies are invaded {continentInvaded} at {nbZombiesContinent < 0 ? "0" : nbZombiesContinent}%</p>
+            <p className="infoMap">Zombies are invaded {continentInvaded} at {nbZombiesContinent}%</p>
             <p className="infoMap">{humanAttack}</p>
           </div>
 

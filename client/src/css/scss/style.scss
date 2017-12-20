@@ -192,7 +192,8 @@ select:-webkit-autofill:focus {
 		}
 	}
 
-	.ReactModal__Content, .ReactModal__Content--after-open {
+	.ReactModal__Content, .ReactModal__Content--after-open,
+	.ReactModal__Overlay, .ReactModal__Overlay--after-open {
 		animation-duration: 3s !important;
 		animation-fill-mode: both !important;
 		animation-name: fadeIn !important;
@@ -446,7 +447,8 @@ select:-webkit-autofill:focus {
 #zombieZone { // Ajouter animations
 
 	.zombieImg {
-		background: no-repeat center/94%;
+		background: no-repeat center;
+		background-size: auto 100%;
 		height: 100%;
 		width: 100%;
 		animation-duration: 1.5s;

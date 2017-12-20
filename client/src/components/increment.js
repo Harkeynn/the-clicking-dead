@@ -90,7 +90,7 @@ class Increment extends Component {
         img = imgSAmerica
         break
       default:
-        console.log("ERROR")
+        console.log("LOADING IMAGE")
     }
 
     return ( <div className="zombieImg" style={{backgroundImage : "url(" + img + ")"}} onClick={this.handleIncrement}>
