@@ -3,6 +3,7 @@ import Modal from 'react-modal'
 import { Scrollbars } from 'react-custom-scrollbars';
 import {totalAchievements} from './achievement';
 import { filter } from 'lodash';
+import updatePassword from '../api/updatePassword'
 
 const customStyles = {
 	overlay: {
@@ -94,7 +95,9 @@ class Profile extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-   alert('test');
+    updatePassword.updatePaswword(this.state.passone);
+    
+    this.setState({messageChangePassword: "The Password has been correctly modified"})
 }
 
   render() {
