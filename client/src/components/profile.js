@@ -36,10 +36,46 @@ class Profile extends Component {
     this.state = {
       username: "Test",
       modalIsOpen: false,
+      passone: "",
+      passtwo: "",
+      messageChangePassword: "",
+      disabled: "disabled"
     }
     this.openModal = this.openModal.bind(this)
     this.closeModal = this.closeModal.bind(this)
   }
+
+  handlePassoneChange = (e) => {
+		this.setState({
+			passone: e.target.value
+    })
+
+    this.comparePassword(e.target.value, this.state.passtwo);
+
+	}
+	handlePasstwoChange = (e) => {
+		this.setState({
+			passtwo: e.target.value
+    })
+
+    this.comparePassword(e.target.value, this.state.passone);
+	}
+
+  comparePassword(valone, valtwo) {
+
+    if(valone == valtwo) {
+      this.setState({
+        messageChangePassword: "Password are the same"
+      })
+      document.getElementById("buttonRec").disabled = false;
+
+    } else {
+        this.setState({
+          messageChangePassword: "Password are not the same"
+        })
+        document.getElementById("buttonRec").disabled = true;
+      }
+    }
 
   openModal() {
     this.setState({modalIsOpen: true})
@@ -55,6 +91,11 @@ class Profile extends Component {
       	userAchievements = userAchievements.concat(filter(this.props.achievements, ["id", totalAchievements[i]]))
       }
   }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+   alert('test');
+}
 
   render() {
 		this.loadAchievements()
@@ -96,18 +137,34 @@ class Profile extends Component {
 
               <h3>Change Password</h3>
 
-              <form>
+              <form onSubmit={this.handleSubmit}>
                 <div id="input">
-                  <input type="text" placeholder="New password"/>
-                  <input type="text" placeholder="Confirm new password"/>
+                <input
+									id="passone"
+									placeholder="Password"
+									type="password"
+									className="validate"
+									value={this.state.passone}
+									onChange={this.handlePassoneChange}
+								/>
+								<input
+									id="passtwo"
+									placeholder="Confirm Password"
+									type="password"
+									className="validate"
+									value={this.state.passtwo}
+									onChange={this.handlePasstwoChange}
+								/>
                 </div>
-                <input type="button" value="Change" />
+                <button type="submit" name="action" id="buttonRec" disabled>Change</button>
+
               </form>
+              {this.state.messageChangePassword}
 
 						</div>
 					</div>
 
-
+							
 				</Modal>
 			</div>
     )

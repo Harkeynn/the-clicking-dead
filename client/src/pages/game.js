@@ -1,21 +1,25 @@
 import React, { Component } from 'react'
 import JSONAutoclickers from '../json/autoclickers.json'
-// COMPONENTS
+import { Link } from 'react-router-dom'
+//COMPONENTS
 import { format } from '../components/numbers'
 import Increment from '../components/increment'
 import Autoclicker from '../components/autoclicker'
 import Login from '../components/login'
 import Profile from '../components/profile'
+import Sauvegarde from '../components/sauvegarde'
 import Achievement from '../components/achievement'
 import Map from '../components/map'
 import Leaderboard from '../components/leaderboard'
-// STYLES
+import SaveStats from '../api/saveStats'
+//STYLES
 import '../css/style.css'
 import { Scrollbars } from 'react-custom-scrollbars';
-import { Row, Col, Nav, NavItem } from 'reactstrap'
-import { Tooltip, OverlayTrigger } from 'react-bootstrap';
-// IMAGES
+import { Container, Row, Col, Nav, NavItem, NavLink } from 'reactstrap'
+import { Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
+//IMAGES
 import logo from '../img/design/logo.png'
+import { setInterval } from 'timers';
 
 
 let nameContinent
@@ -25,14 +29,13 @@ const riposte = [
 ]
 let randomAttack;
 
-
 class Game extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
       zombies: 0,
-      humans: 7000,
+      humans: 7000000000,
       autoClickTotal: 0,
       score: 0,
       areFighting: false,
@@ -80,6 +83,8 @@ class Game extends Component {
       })
     })
 
+    setInterval(() => this.saveUserStats(), 10000)
+    document.title = format(Math.floor(this.state.zombies)) + " zombies - The Clicking Dead"
     this.getScore()
   }
 
@@ -87,7 +92,15 @@ class Game extends Component {
     clearInterval(this.timer)
   }
 
-  // Updates zombies and page title when clicking on the <Incremement /> button
+  saveUserStats(){
+    SaveStats.save(
+      this.state.zombies,
+      this.state.humans,
+      this.state.score
+    );
+  }
+
+  //Updates zombies and page title when clicking on the <Incremement /> button
   handleZombIncr = () => {
     this.getScore()
     this.setState(
@@ -101,8 +114,8 @@ class Game extends Component {
     )
   }
 
-  // Adds the value of the autoclicker bought to the total of ZPS
-  // Or update the total of ZPS if an upgrade has been bought
+  //Adds the value of the autoclicker bought to the total of ZPS
+  //Or update the total of ZPS if an upgrade has been bought
   handleAutoClick = (price) => {
     let totalZPS = 0
     Object.keys(JSONAutoclickers).map((autoclicker) => {
@@ -137,7 +150,7 @@ class Game extends Component {
     })
   }
 
-  // Adds the total of zombies/sec to zombies every 0.5 seconds and update the page title
+  //Adds the total of zombies/sec to zombies every 0.5 seconds and update the page title
   autoClick() {
     return setInterval(() => {
       this.getScore()
@@ -151,11 +164,14 @@ class Game extends Component {
 
   continentName = (nContinent) => {
     nameContinent = nContinent
+		console.log(nContinent)
 	}
 
   humanFighting(interval) { // Riposte des humains
 
     this.setState({ areFighting: true, })
+
+    let interval = 1000;
     let destroyZombies = 1;
 
     this.humansTimer = setInterval(() => {
@@ -173,6 +189,7 @@ class Game extends Component {
       if(1 === Math.floor(Math.random()*30)) {
         randomAttack = Math.floor(Math.random()*2);
         destroyZombies = riposte[randomAttack][1];
+        console.log("ATTAQUE : " + randomAttack)
       }
 
       this.setState({
@@ -181,6 +198,8 @@ class Game extends Component {
     }, interval)
 
   }
+
+
 
   render() {
 
@@ -194,7 +213,8 @@ class Game extends Component {
       <Tooltip id="tooltip">{humansAll}</Tooltip>
     );
 
-    console.log("USERID : " + this.state.userId)
+    console.log("zombies : " + this.state.zombies)
+    console.log("autoclick : " + this.state.autoClickTotal)
 
     if(!this.state.areFighting && zombiesInt === 100){ this.humanFighting(1000) } // Humans are fighting back
 
@@ -227,7 +247,6 @@ class Game extends Component {
 
         <div className="container-fluid" id="content">
           <Row className="no-gutters">
-
             <Col md="3" id="zombieZone">
               <Increment
                 handleZombieIncrement={this.handleZombIncr}
@@ -236,7 +255,6 @@ class Game extends Component {
                 whatContinent = {nameContinent}
               />
             </Col>
-
             <Col md="6" id="mapZone">
               <img className="img-fluid" src={logo} alt="Logo" title="Logo" />
 
@@ -289,6 +307,7 @@ class Game extends Component {
         </div>
       </div> }
     </div> )
+    )
   }
 }
 

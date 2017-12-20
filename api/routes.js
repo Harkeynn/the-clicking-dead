@@ -69,12 +69,19 @@ module.exports = function(app, passport) {
 
     })
 
-
-
     app.get('/userid', (req, res) => {
-        let userData = require('./userdata');
+        let userData = require('./userdata');        
         return res.json({
             userid: userData.id
+        })
+        
+    })
+
+    app.get('/logout', (req, res) => {
+        let userData = require('./userdata');
+        userData.id.splice(0);
+        return res.json({
+            sucess: 200
         })
     })
 
@@ -92,37 +99,13 @@ module.exports = function(app, passport) {
             }
         });
 
-    // app.post('/game', passport.authenticate('local-login', {
-    //         successRedirect : '/game', // redirect to the secure profile section
-    //         failureRedirect : '/login', // redirect back to the signup page if there is an error
-    //         failureFlash : true // allow flash messages
-    //     }),
-    //     function(req, res) {
-    //
-    //         if (req.body.remember) {
-    //             req.session.cookie.maxAge = 1000 * 60 * 3;
-    //         } else {
-    //             req.session.cookie.expires = false;
-    //         }
-    //     });
 
-/*        app.post('/game', function (req, res, next) {
-            passport.authenticate('local-login', function (err, user, info) {
-                if (err) {
-                    // mysend(res, 500, 'Ups. Something broke!');
-                } else if (info) {
-                    // mysend(res, 401, 'unauthorized');
-                } else {
-                    req.login(user, function(err) {
-                        if (err) {
-                            // mysend(res, 500, 'Ups.');
-                        } else {
-                            // mysend(res, 200, JSON.stringify(user));
-                        }
-                        })
-                }
-            })(req, res, next);
-        });*/
+    // =====================================
+    // SAVE ==============================
+    // =====================================
+        app.post('/save', function(req, res) {
+            return accountController.saveStats(req, res);
+        })
 
 
 

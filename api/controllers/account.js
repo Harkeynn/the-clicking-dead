@@ -1,4 +1,5 @@
 const Account = require("../models/account")
+const userId = require("../userdata.json")
 
 function index(req, res) {
     Account.findAll().then(accounts => {
@@ -40,4 +41,18 @@ function create(req, res) {
     })
 }
 
-module.exports = { index, indexOne, indexOneWithId, create }
+function saveStats(req, res){
+    console.log("uhezhfuizehih")
+    console.log(req.body);
+    Account.update(
+        {
+            nbzombies: req.body.nbzombies,
+            nbhumains: req.body.nbhumains,
+            score: req.body.score
+        },
+        {where: {id: userId.id}}
+    )
+    };
+
+
+module.exports = { index, indexOne, indexOneWithId, create, saveStats }

@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "base64-img": "^1.0.3",
     "bootstrap": "^4.0.0-beta",
+    "chai": "^4.1.2",
     "font-awesome": "^4.7.0",
+    "mocha": "^4.0.1",
     "lodash": "^4.17.4",
-    "moment": "^2.20.1",
     "mysql2": "^1.5.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
@@ -28,6 +28,7 @@
     "reactstrap": "^5.0.0-alpha.3",
     "sequelize": "^4.22.0",
     "shuffle-array": "^1.0.1",
+    "sinon": "^4.1.3",
     "sqlite3": "^3.1.13"
   },
   "scripts": {

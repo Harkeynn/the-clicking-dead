@@ -1,4 +1,4 @@
- 	import React, { Component } from 'react'
+import React, { Component } from 'react'
 import Modal from 'react-modal'
 import Signin from './signin'
 const passwordHash = require('password-hash')
@@ -48,7 +48,17 @@ class Login extends Component {
     }
     openModal() {
         this.setState({ modalIsOpen: true })
-    }
+	}
+
+    logout() {
+		fetch('http://localhost:1973/logout')
+		.then((res) => {
+			return res.json()
+		})
+		.then(jsonData => {
+			window.location.reload();
+		});
+}
 
 	testModal() {
 		let result = true;
@@ -90,7 +100,6 @@ class Login extends Component {
 
 
         e.preventDefault()
-
         fetch('http://localhost:1973/game', {
             method: 'POST',
             headers: {
@@ -114,7 +123,7 @@ class Login extends Component {
 	render() {
 		return (
 			<div id="modal">
-				<a data-target="modal1" className="btn modal-trigger" onClick={this.openModal}>LogOut</a>
+				<a data-target="modal1" className="btn modal-trigger" onClick={this.logout}>Log Out</a>
 				<Modal
 					isOpen={this.state.modalIsOpen}
 					onRequestClose={this.closeModal}
@@ -160,10 +169,6 @@ class Login extends Component {
 
 				</Modal>
 			</div>
-
-
-
-
 		)
 	}
 }

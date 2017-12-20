@@ -1,6 +1,6 @@
 const qs = require('querystring')
-    const accountController = require('./controllers/account')
-    const leaderboardController = require('./controllers/leaderboard')
+const accountController = require('./controllers/account')
+const leaderboardController = require('./controllers/leaderboard')
 
 const express = require('express')
 const session  = require('express-session');
@@ -8,8 +8,6 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 var morgan = require('morgan');
-
-
 
 const app = express()
 const port = 1973
@@ -50,5 +48,7 @@ require('./routes')(app, passport); // load our routes and pass in our app and f
 // launch ======================================================================
 app.listen(port);
 console.log('The magic happens on port ' + port);
+
+module.exports = app
 
 

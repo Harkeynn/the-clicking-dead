@@ -2,7 +2,7 @@ const db = require('../db.js')
 const Sequelize = require('sequelize')
 var bcrypt = require('bcrypt-nodejs');
 
-const Account = db.define('account', {
+const Account = db.define('accounts', {
 	nickname: {
 		type: Sequelize.STRING
 	},
@@ -29,6 +29,7 @@ Account.sync().then(() => {
 		.then(account => {
 			if (account === null) {
 				Account.create({
+					id: 1,
 					nickname: 'Admin',
 					password: bcrypt.hashSync('Admin', null, null),
 					email: 'admin@ad.min',

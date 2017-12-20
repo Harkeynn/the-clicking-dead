@@ -14,6 +14,7 @@ class Autoclicker extends Component {
       isBuying: false,
     }
   }
+  
 
 
   //set price to base price * 1.15^N (N=number of autoclicker(s))

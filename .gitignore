@@ -29,5 +29,6 @@ npm-debug.log*
 ./idea
 idea/*
 
-#conf
-db.conf.js
+# conf
+node_modules/
+api/db.conf.js
