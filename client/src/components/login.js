@@ -48,7 +48,17 @@ class Login extends Component {
     }
     openModal() {
         this.setState({ modalIsOpen: true })
-    }
+	}
+	
+    logout() {
+		fetch('http://localhost:1973/logout')
+		.then((res) => {
+			return res.json()
+		})
+		.then(jsonData => {
+			window.location.reload();
+		});
+}
 
 	testModal() {
 		console.log("TESSST MODAL");
@@ -117,7 +127,7 @@ class Login extends Component {
 	render() {
 		return (
 			<div id="modal">
-				<a data-target="modal1" className="btn modal-trigger" onClick={this.openModal}>Log Out</a>
+				<a data-target="modal1" className="btn modal-trigger" onClick={this.logout}>Log Out</a>
 				<Modal
 					isOpen={this.state.modalIsOpen}
 					onRequestClose={this.closeModal}

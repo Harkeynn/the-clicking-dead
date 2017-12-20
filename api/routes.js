@@ -51,9 +51,18 @@ module.exports = function(app, passport) {
 
 
     app.get('/userid', (req, res) => {
-        let userData = require('./userdata');
+        let userData = require('./userdata');        
         return res.json({
             userid: userData.id
+        })
+        
+    })
+
+    app.get('/logout', (req, res) => {
+        let userData = require('./userdata');
+        userData.id.splice(0);
+        return res.json({
+            sucess: 200
         })
     })
 
