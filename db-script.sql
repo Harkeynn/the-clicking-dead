@@ -16,17 +16,6 @@
 CREATE DATABASE IF NOT EXISTS `clickingdeadv2` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `clickingdeadv2`;
 
--- Export de la structure de la table clickingdeadv2. accountachievement
-CREATE TABLE IF NOT EXISTS `accountachievement` (
-  `iduser` int(10) NOT NULL,
-  `idachievement` int(10) NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NOT NULL,
-  PRIMARY KEY (`iduser`,`idachievement`),
-  KEY `idachievement` (`idachievement`),
-  CONSTRAINT `accountachievement_ibfk_1` FOREIGN KEY (`iduser`) REFERENCES `accounts` (`id`),
-  CONSTRAINT `accountachievement_ibfk_2` FOREIGN KEY (`idachievement`) REFERENCES `achievement` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Export de données de la table clickingdeadv2.accountachievement : ~4 rows (environ)
 /*!40000 ALTER TABLE `accountachievement` DISABLE KEYS */;
@@ -38,16 +27,7 @@ INSERT INTO `accountachievement` (`iduser`, `idachievement`, `createdAt`, `updat
 /*!40000 ALTER TABLE `accountachievement` ENABLE KEYS */;
 
 -- Export de la structure de la table clickingdeadv2. accountautoclicker
-CREATE TABLE IF NOT EXISTS `accountautoclicker` (
-  `iduser` int(10) NOT NULL,
-  `idautoclicker` int(10) NOT NULL,
-  `owned` int(10) NOT NULL,
-  `upgrade` int(10) NOT NULL,
-  PRIMARY KEY (`iduser`,`idautoclicker`),
-  KEY `idautoclicker` (`idautoclicker`),
-  CONSTRAINT `accountautoclicker_ibfk_1` FOREIGN KEY (`iduser`) REFERENCES `accounts` (`id`),
-  CONSTRAINT `accountautoclicker_ibfk_2` FOREIGN KEY (`idautoclicker`) REFERENCES `autoclicker` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 -- Export de données de la table clickingdeadv2.accountautoclicker : ~0 rows (environ)
 /*!40000 ALTER TABLE `accountautoclicker` DISABLE KEYS */;
@@ -144,6 +124,28 @@ CREATE TABLE IF NOT EXISTS `leaderboards` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
+-- Export de la structure de la table clickingdeadv2. accountachievement
+CREATE TABLE IF NOT EXISTS `accountachievement` (
+  `iduser` int(10) NOT NULL,
+  `idachievement` int(10) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`iduser`,`idachievement`),
+  KEY `idachievement` (`idachievement`),
+  CONSTRAINT `accountachievement_ibfk_1` FOREIGN KEY (`iduser`) REFERENCES `accounts` (`id`),
+  CONSTRAINT `accountachievement_ibfk_2` FOREIGN KEY (`idachievement`) REFERENCES `achievement` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `accountautoclicker` (
+  `iduser` int(10) NOT NULL,
+  `idautoclicker` int(10) NOT NULL,
+  `owned` int(10) NOT NULL,
+  `upgrade` int(10) NOT NULL,
+  PRIMARY KEY (`iduser`,`idautoclicker`),
+  KEY `idautoclicker` (`idautoclicker`),
+  CONSTRAINT `accountautoclickerr_ibfk_1` FOREIGN KEY (`iduser`) REFERENCES `accounts` (`id`),
+  CONSTRAINT `accountautoclickerr_ibfk_2` FOREIGN KEY (`idautoclicker`) REFERENCES `autoclicker` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- Export de données de la table clickingdeadv2.leaderboards : ~2 rows (environ)
 /*!40000 ALTER TABLE `leaderboards` DISABLE KEYS */;
 INSERT INTO `leaderboards` (`id`, `nickname`, `score`, `createdAt`, `updatedAt`) VALUES
