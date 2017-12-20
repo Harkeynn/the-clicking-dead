@@ -2,7 +2,7 @@
   "autoclicker1": {
     "title": "Contagious Zombies",
     "description": "Create zombies that spread the virus for you.",
-    "price": "15",
+    "price": "8",
     "incrementedPrice": "8",
     "clickValue": "0.1",
     "totalClickValue": "0",
@@ -46,7 +46,7 @@
     "title": "Discreet Zombies",
     "description": "Create discreet zombies that spread the virus for you",
     "price": "30",
-    "incrementedPrice": "19",
+    "incrementedPrice": "30",
     "clickValue": "0.3",
     "totalClickValue": "0",
     "number": "0",
@@ -68,7 +68,7 @@
   "autoclicker3": {
     "title": "Climbing Zombies",
     "description": "Create climbing zombies that spread the virus for you.",
-    "price": "70",
+    "price": "50",
     "incrementedPrice": "50",
     "clickValue": "0.5",
     "totalClickValue": "0",
@@ -101,8 +101,8 @@
   "autoclicker4": {
     "title": "Swimming Zombies",
     "description": "Create swimming zombies that spread the virus for you.",
-    "price": "120",
-    "incrementedPrice": "80",
+    "price": "100",
+    "incrementedPrice": "100",
     "clickValue": "1",
     "totalClickValue": "0",
     "number": "0",
@@ -124,7 +124,7 @@
   "autoclicker5": {
     "title": "Sprinting Zombies",
     "description": "Create sprinting zombies that spread the virus for you.",
-    "price": "250",
+    "price": "150",
     "incrementedPrice": "120",
     "clickValue": "2",
     "totalClickValue": "0",
@@ -157,8 +157,8 @@
   "autoclicker6": {
     "title": "Zombie Animals",
     "description": "Create zombies animals that spread the virus for you.",
-    "price": "400",
-    "incrementedPrice": "300",
+    "price": "200",
+    "incrementedPrice": "200",
     "clickValue": "3",
     "totalClickValue": "0",
     "number": "0",
@@ -200,8 +200,8 @@
   "autoclicker7": {
     "title": "Horde",
     "description": "A horde of zombies killing a lot of people.",
-    "price": "1000",
-    "incrementedPrice": "500",
+    "price": "300",
+    "incrementedPrice": "300",
     "clickValue": "5",
     "totalClickValue": "0",
     "number": "0",

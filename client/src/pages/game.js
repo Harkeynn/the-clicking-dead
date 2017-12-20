@@ -267,6 +267,7 @@ class Game extends Component {
 
     if(!this.state.winLose){
       this.winLose()
+      console.log("TEST")
     }
 
     return ( <div>
