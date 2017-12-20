@@ -1,22 +1,20 @@
 import React, { Component } from 'react'
 import JSONAutoclickers from '../json/autoclickers.json'
-import { Link } from 'react-router-dom'
-//COMPONENTS
+// COMPONENTS
 import { format } from '../components/numbers'
 import Increment from '../components/increment'
 import Autoclicker from '../components/autoclicker'
 import Login from '../components/login'
 import Profile from '../components/profile'
-import Sauvegarde from '../components/sauvegarde'
 import Achievement from '../components/achievement'
 import Map from '../components/map'
 import Leaderboard from '../components/leaderboard'
-//STYLES
+// STYLES
 import '../css/style.css'
 import { Scrollbars } from 'react-custom-scrollbars';
-import { Container, Row, Col, Nav, NavItem, NavLink } from 'reactstrap'
-import { Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
-//IMAGES
+import { Row, Col, Nav, NavItem } from 'reactstrap'
+import { Tooltip, OverlayTrigger } from 'react-bootstrap';
+// IMAGES
 import logo from '../img/design/logo.png'
 
 
@@ -27,22 +25,61 @@ const riposte = [
 ]
 let randomAttack;
 
+
 class Game extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
       zombies: 0,
-      humans: 7000000000,
+      humans: 7000,
       autoClickTotal: 0,
       score: 0,
       areFighting: false,
+      userId: 0,
+      username : "",
+      achievements : "",
     }
   }
 
-  //Sets the page title on initialisation
+  // Sets the page title on initialisation
   componentDidMount() {
-    document.title = format(Math.floor(this.state.zombies)) + " zombies - The Clicking Dead"
+
+    // FETCH USER ID IN JSON
+    fetch('http://localhost:1973/userid')
+    .then((res) => {
+      return res.json()
+    })
+    .then(jsonData => {
+      let userid = jsonData.userid[0];
+      this.setState({ userId: userid, })
+
+      if (this.state.userId) {
+        // FETCH CONNECTED USER
+        fetch('http://localhost:1973/accounts/'+this.state.userId+'')
+        .then((res) => {
+          if (!res.ok) { throw Error(res.statusText);}
+          return res.json()
+        })
+        .then(jsonData => {
+          this.setState ({
+            username : jsonData.nickname,
+          })
+        })
+      }
+    })
+
+    // FETCH ACHIEVEMENT
+    fetch('http://localhost:1973/achievement')
+    .then((res) => {
+      return res.json()
+    })
+    .then(jsonData => {
+      this.setState ({
+        achievements : jsonData,
+      })
+    })
+
     this.getScore()
   }
 
@@ -50,7 +87,7 @@ class Game extends Component {
     clearInterval(this.timer)
   }
 
-  //Updates zombies and page title when clicking on the <Incremement /> button
+  // Updates zombies and page title when clicking on the <Incremement /> button
   handleZombIncr = () => {
     this.getScore()
     this.setState(
@@ -64,8 +101,8 @@ class Game extends Component {
     )
   }
 
-  //Adds the value of the autoclicker bought to the total of ZPS
-  //Or update the total of ZPS if an upgrade has been bought
+  // Adds the value of the autoclicker bought to the total of ZPS
+  // Or update the total of ZPS if an upgrade has been bought
   handleAutoClick = (price) => {
     let totalZPS = 0
     Object.keys(JSONAutoclickers).map((autoclicker) => {
@@ -100,7 +137,7 @@ class Game extends Component {
     })
   }
 
-  //Adds the total of zombies/sec to zombies every 0.5 seconds and update the page title
+  // Adds the total of zombies/sec to zombies every 0.5 seconds and update the page title
   autoClick() {
     return setInterval(() => {
       this.getScore()
@@ -114,17 +151,14 @@ class Game extends Component {
 
   continentName = (nContinent) => {
     nameContinent = nContinent
-		console.log(nContinent)
 	}
 
-  humanFighting() { // Riposte des humains
+  humanFighting(interval) { // Riposte des humains
 
     this.setState({ areFighting: true, })
-
-    let interval = 1000;
     let destroyZombies = 1;
 
-    return setInterval(() => {
+    this.humansTimer = setInterval(() => {
 
       if(this.state.zombies < 50) {
         destroyZombies = 1;
@@ -132,12 +166,13 @@ class Game extends Component {
 
       if(this.state.zombies > 50) {
         destroyZombies = 3;
+        clearInterval(this.humansTimer);
+        this.humanFighting(2000);
       }
 
       if(1 === Math.floor(Math.random()*30)) {
         randomAttack = Math.floor(Math.random()*2);
         destroyZombies = riposte[randomAttack][1];
-        console.log("ATTAQUE : " + randomAttack)
       }
 
       this.setState({
@@ -147,40 +182,44 @@ class Game extends Component {
 
   }
 
-
-
   render() {
+
+    let zombiesTop = format(Math.floor(this.state.zombies))
+    document.title = zombiesTop < 0 ? "You lost - The Clicking Dead" : zombiesTop + " zombies - The Clicking Dead"
 
     let zombiesInt = Math.floor(this.state.zombies)
     let humans = format(Math.floor(this.state.humans))
-    let humansAll = Math.floor(this.state.humans)
+    let humansAll = Math.floor(this.state.humans).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     const tooltipAllHumans = (
       <Tooltip id="tooltip">{humansAll}</Tooltip>
     );
 
-    console.log("zombies : " + this.state.zombies)
-    console.log("autoclick : " + this.state.autoClickTotal)
+    console.log("USERID : " + this.state.userId)
 
-    if(!this.state.areFighting && zombiesInt === 10){ this.humanFighting() } // Humans are fighting back
+    if(!this.state.areFighting && zombiesInt === 100){ this.humanFighting(1000) } // Humans are fighting back
 
-    return (
-      <div>
-
+    return ( <div>
+      {!this.state.userId || this.state.userId <= 0 ? <div>
+        <Login/>
+      </div> : <div>
         <nav className="navbar fixed-top navbar-expand-sm" id="mainNav">
         <button className="ml-auto navbar-toggler" type="button" data-toggle="collapse" data-target="#fullNav" aria-controls="fullNav" aria-expanded="false" aria-label="Toggle navigation">
-				 Menu <i class="fa fa-bars" aria-hidden="true"></i>
+				 Menu <i className="fa fa-bars" aria-hidden="true"></i>
 			  </button>
-        <div class="collapse navbar-collapse" id="fullNav">
+        <div className="collapse navbar-collapse" id="fullNav">
           <Nav className="navbar-nav ml-auto">
-
             <NavItem>
-              <i class="fa fa-user" aria-hidden="true"></i><Profile/>
+              <i className="fa fa-user" aria-hidden="true"></i>
+              <Profile
+                username={this.state.username}
+                achievements={this.state.achievements}
+              />
             </NavItem>
             <NavItem>
-              <i class="fa fa-trophy" aria-hidden="true"></i><Leaderboard />
+              <i className="fa fa-trophy" aria-hidden="true"></i><Leaderboard userId = {this.state.userId} />
             </NavItem>
             <NavItem>
-              <i class="fa fa-sign-out" aria-hidden="true"></i><Login/>
+              <i className="fa fa-sign-out" aria-hidden="true"></i><Login/>
             </NavItem>
           </Nav>
         </div>
@@ -188,6 +227,7 @@ class Game extends Component {
 
         <div className="container-fluid" id="content">
           <Row className="no-gutters">
+
             <Col md="3" id="zombieZone">
               <Increment
                 handleZombieIncrement={this.handleZombIncr}
@@ -196,6 +236,7 @@ class Game extends Component {
                 whatContinent = {nameContinent}
               />
             </Col>
+
             <Col md="6" id="mapZone">
               <img className="img-fluid" src={logo} alt="Logo" title="Logo" />
 
@@ -209,14 +250,14 @@ class Game extends Component {
                 <Col md="6" className="text-right">
                   <div className="statsContent">
                     <h3>Zombies</h3>
-                    <p>{zombiesInt}</p>
+                    <p>{zombiesInt < 0 ? "0" : zombiesInt}</p>
                   </div>
                 </Col>
                 <Col md="6" className="text-left">
                   <div className="statsContent">
                     <h3>Humans</h3>
                     <OverlayTrigger placement="bottom" overlay={tooltipAllHumans}>
-                      <p>{humans}</p>
+                      <p>{humans < 0 ? "0" : humans}</p>
                     </OverlayTrigger>
                   </div>
                 </Col>
@@ -237,40 +278,17 @@ class Game extends Component {
                   )
                 })}
               </Scrollbars>
+              <p id="totalAutoClick">Auto generated zombies : {this.state.autoClickTotal}</p>
             </Col>
           </Row>
-          <Row className="no-gutters" id="achievementsZone">
-            <Achievement />
-          </Row>
-        </div>
-      </div>
-
-        /*<div className="container">
-          <h1>The Clicking Dead</h1>
-          <Login/>
-          <Profile/>
-          <Sauvegarde score={this.state.score}/>
-          <Link to="/leaderboard">Leaderboard</Link>
-          <Increment
-            handleZombieIncrement={this.handleZombIncr}
-            zombies={format(Math.floor(this.state.zombies))}
-            zps={format(this.state.autoClickTotal)}
+          <Achievement
+            data={this.state.achievements}
+            iduser = {this.state.userId}
+            click={this.state.zombies}
           />
-          {Object.keys(JSONAutoclickers).map((autoclicker) => {
-            return (
-              <Autoclicker
-              zombies={this.state.zombies}
-              handleAutoClick={this.handleAutoClick}
-              autoclicker={autoclicker}
-              zps={this.state.autoClickTotal}
-              handleUpgrade={this.handleAutoClick}
-              key={autoclicker}
-            />
-            )
-          })}
-        </div>*/
-
-    )
+        </div>
+      </div> }
+    </div> )
   }
 }
 

@@ -2,8 +2,25 @@
 module.exports = function(app, passport) {
     const accountController = require('./controllers/account')
     const leaderboardController = require('./controllers/leaderboard')
+    const achievementController = require('./controllers/achievement')
+    const accountAchievementController = require('./controllers/accountAchievement')
 
+//AccountAchievement
 
+    app.get('/accountachievement', (req, res) => {
+      return accountAchievementController.index(req, res)
+    })
+    app.post('/accountachievement', (req, res) => {
+      return accountAchievementController.create(req, res)
+    })
+
+//ACHIEVEMENT
+
+    app.get('/achievement', (req, res) => {
+      return achievementController.index(req, res)
+    })
+
+//ACCOUNT
     app.get('/accounts', (req, res) => {
         return accountController.index(req, res)
     })
@@ -12,8 +29,12 @@ module.exports = function(app, passport) {
         return accountController.create(req, res)
     })
 
-    app.get('/accounts/:nickname', (req, res) => {
+    /*app.get('/accounts/:nickname', (req, res) => {
         return accountController.indexOne(req, res)
+    })*/
+
+    app.get('/accounts/:id', (req, res) => {
+        return accountController.indexOneWithId(req, res)
     })
 
     app.get('/leaderboard', (req, res) => {

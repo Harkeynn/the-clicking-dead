@@ -12,7 +12,6 @@
 	$transpDarkGreen: rgba(69, 76, 67, 0.7);
 	$red: #ae0001;
 
-
 // Mixins
 
 	@mixin transition($transProperty, $transDuration, $transFunction:"ease-in-out") {
@@ -72,18 +71,29 @@
     	}
     }
 
+// Animation - Animate.css
 
+@keyframes fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
 
 /* ------- DESIGN ------- */
 
 body {
 	font-size: 14px !important;
 	color: #{$lightGreen} !important;
+	position: relative;
+	background: #222325 url("../img/design/background.jpg") no-repeat fixed center/cover;
 	p { margin: 0px !important; };
 }
 
+.col, .col-md-3{
+	position: static !important;
+}
+
 #root {
-	background: #222325 url("../img/design/background.jpg") no-repeat fixed center/cover;
+
 	text-align: justify;
 	font-family: 'Lato', sans-serif;
 	color: #{$lightGreen};
@@ -104,7 +114,14 @@ body {
 
 
 #mainNav {
-	background-color: #{$transpDarkGreen} !important;
+	//background-color: #{$transpDarkGreen} !important;
+	background: rgba(69,76,67,0.7);
+	background: -moz-linear-gradient(left, rgba(69,76,67,0) 0%, rgba(69,76,67,0.7) 100%);
+	background: -webkit-gradient(left top, right top, color-stop(0%, rgba(69,76,67,0)), color-stop(100%, rgba(69,76,67,0.7)));
+	background: -webkit-linear-gradient(left, rgba(69,76,67,0) 0%, rgba(69,76,67,0.7) 100%);
+	background: -o-linear-gradient(left, rgba(69,76,67,0) 0%, rgba(69,76,67,0.7) 100%);
+	background: -ms-linear-gradient(left, rgba(69,76,67,0) 0%, rgba(69,76,67,0.7) 100%);
+	background: linear-gradient(to right, rgba(69,76,67,0) 0%, rgba(69,76,67,0.7) 100%);
 	font-weight: bold;
 
 	i { margin-right: 3px; }
@@ -173,6 +190,12 @@ select:-webkit-autofill:focus {
 				color: lighten($lightGreen, 10%);
 			}
 		}
+	}
+
+	.ReactModal__Content, .ReactModal__Content--after-open {
+		animation-duration: 3s !important;
+		animation-fill-mode: both !important;
+		animation-name: fadeIn !important;
 	}
 
 	.modalContent {
@@ -363,7 +386,22 @@ select:-webkit-autofill:focus {
 		li#player {
 			background-color: rgba(81, 38, 30, 0.6);
 			border-radius: 3px;
-			&:before { content: "747."; }
+		}
+
+		li.notBest {
+			&:before {
+				content: "";
+				margin-right: 0px;
+			}
+
+			span {
+				margin-right: 5px;
+				vertical-align: middle;
+				font-size: 20px;
+				font-weight: bold;
+				opacity: 0.7;
+				margin-right: 10px;
+			}
 		}
 	}
 
@@ -406,33 +444,16 @@ select:-webkit-autofill:focus {
 }
 
 #zombieZone { // Ajouter animations
-	position: relative;
 
-	img {
-		cursor: pointer;
-		position: absolute; // Ajouter media-queries
-		top: 50%;
-    	-webkit-transform: translateY(-50%);
-    	-ms-transform: translateY(-50%);
-    	transform: translateY(-50%);
-    	max-height: 650px;
-    	right: 0;
-    	left: 0;
-    	margin: auto;
+	.zombieImg {
+		background: no-repeat center/94%;
+		height: 100%;
+		width: 100%;
+		animation-duration: 1.5s;
+		animation-fill-mode: both;
+		animation-name: fadeIn;
 
 		&:active { cursor: pointer; }
-	}
-}
-
-.zombieImg {
-	background: no-repeat center/94%;
-	height: 100%;
-	width: 100%;
-
-	&:active{
-		background-size: 96%;
-		transform: rotate(1deg);
-		cursor: pointer;
 	}
 }
 
@@ -482,7 +503,14 @@ select:-webkit-autofill:focus {
 		}
 	}
 }
-
+.tooltip-inner{
+	text-align: left !important;
+	font-size: 12px !important;
+	background: rgba(6,7,6,0.9) !important;
+}
+.tooltip-inner b{
+	color : lighten($red, 35%) !important;
+}
 #improvementsZone {
 	padding: 20px 0px 40px 20px;
 
@@ -500,6 +528,7 @@ select:-webkit-autofill:focus {
 		@include transition(all, 0.2s);
 		@include alignItems(center);
 		position: relative;
+		border-bottom: 2px solid #313630;
 
 		&:not(:last-child) { border-bottom: 2px solid #313630; }
 
@@ -562,6 +591,8 @@ select:-webkit-autofill:focus {
 
 #achievementsZone {
 
+	min-height: 120px;
+
 	.achievementBox {
 		@include flexBox;
 		@include alignItems(center);
@@ -569,13 +600,17 @@ select:-webkit-autofill:focus {
 		background-color: #{$transpDarkGreen};
 		padding: 10px;
 		border-radius: 5px;
+		animation-duration: 3s;
+		animation-fill-mode: both;
+		animation-name: fadeIn;
 
 		&:hover { cursor: pointer; }
 	}
 
 	img {
 		margin-right: 10px;
-		border-radius: 50%
+		border-radius: 50%;
+		height: 50px;
 	}
 
 	.achievementBox:last-child { margin-right: 0px; }

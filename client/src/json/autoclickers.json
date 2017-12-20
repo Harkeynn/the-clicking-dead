@@ -1,88 +1,180 @@
 {
   "autoclicker1": {
-    "title": "Zombies contagieux",
-    "description": "Créé des zombies qui répandent le virus pour vous",
+    "title": "Contagious Zombies",
+    "description": "Create zombies that spread the virus for you",
     "price": "10",
     "incrementedPrice": "10",
     "clickValue": "0.1",
     "totalClickValue": "0",
     "number": "0",
+    "image": "https://img15.hostingpics.net/pics/219832iconcontagion.jpg",
     "upgrades": {
       "upgrade1": {
         "title": "Steroïdes",
         "upgradeValue": "2",
         "upgradeType": "x",
-        "description": "Description",
-        "price": "50",
+        "description": "Double the power of infection",
+        "price": "0",
+        "unlockAt":"5",
+        "bought": false,
+        "value": "1"
+      },
+      "upgrade2": {
+        "title": "Steroïdes",
+        "upgradeValue": "2",
+        "upgradeType": "x",
+        "description": "Double the power of infection",
+        "price": "0",
         "unlockAt":"10",
-        "bought": "false",
+        "bought": false,
+        "value": "1"
+      },
+      "upgrade3": {
+        "title": "Steroïdes",
+        "upgradeValue": "2",
+        "upgradeType": "x",
+        "description": "Double the power of infection",
+        "price": "0",
+        "unlockAt":"20",
+        "bought": false,
         "value": "1"
       }
     },
     "value": "1"
   },
   "autoclicker2": {
-    "title": "Zombies sprinters",
-    "description": "Créé des zombies sprinters qui répandent le virus pour vous",
-    "price": "100",
-    "incrementedPrice": "100",
-    "clickValue": "1",
+    "title": "Climbing Zombies",
+    "description": "Create climbing zombies that spread the virus for you",
+    "price": "50",
+    "incrementedPrice": "50",
+    "clickValue": "0.5",
     "totalClickValue": "0",
     "number": "0",
+    "image": "https://img15.hostingpics.net/pics/635877icongrimpe.jpg",
     "upgrades":{
       "upgrade1": {
-        "title": "Usain Bolt",
-        "upgradeValue": "5",
+        "title": "Mountaineer",
+        "upgradeValue": "2",
         "upgradeType": "+",
-        "description": "",
-        "price": "500",
-        "unlockAt":"10",
-        "bought": "false",
+        "description": "Gain two more zombies per seconds",
+        "price": "0",
+        "unlockAt":"5",
+        "bought": false,
         "value": "1"
-      },
-      "upgrade2": {
-        "title": "Le mur du son",
-        "upgradeValue": "2.5",
-        "upgradeType": "+",
-        "description": "Description",
-        "price": "1000",
-        "unlockAt":"25",
-        "bought": "false",
-        "value": "2"
       }
     },
     "value": "2"
   },
   "autoclicker3": {
-    "title": "Zombies sprinters",
-    "description": "Créé des zombies sprinters qui répandent le virus pour vous",
+    "title": "Sprinting Zombies",
+    "description": "Create sprinting zombies that spread the virus for you",
     "price": "100",
     "incrementedPrice": "100",
     "clickValue": "1",
     "totalClickValue": "0",
     "number": "0",
+    "image": "https://img15.hostingpics.net/pics/812258iconsprint.jpg",
     "upgrades":{
       "upgrade1": {
         "title": "Usain Bolt",
         "upgradeValue": "5",
         "upgradeType": "+",
-        "description": "",
-        "price": "500",
+        "description": "Gain five more zombies per seconds",
+        "price": "0",
         "unlockAt":"10",
-        "bought": "false",
+        "bought": false,
         "value": "1"
       },
       "upgrade2": {
-        "title": "Le mur du son",
-        "upgradeValue": "2.5",
+        "title": "Wall of sound",
+        "upgradeValue": "10",
         "upgradeType": "+",
-        "description": "Description",
-        "price": "1000",
+        "description": "Gain ten more zombies per seconds",
+        "price": "0",
         "unlockAt":"25",
-        "bought": "false",
+        "bought": false,
         "value": "2"
       }
     },
-    "value": "2"
+    "value": "3"
+  },
+  "autoclicker4": {
+    "title": "Swimming Zombies",
+    "description": "Create swimming zombies that spread the virus for you",
+    "price": "150",
+    "incrementedPrice": "150",
+    "clickValue": "2",
+    "totalClickValue": "0",
+    "number": "0",
+    "image": "https://img15.hostingpics.net/pics/799045iconnage.jpg",
+    "upgrades":{
+    },
+    "value": "4"
+  },
+  "autoclicker5": {
+    "title": "Animals Zombies",
+    "description": "Create animals zombies that spread the virus for you",
+    "price": "200",
+    "incrementedPrice": "200",
+    "clickValue": "1",
+    "totalClickValue": "0",
+    "number": "0",
+    "image": "https://img15.hostingpics.net/pics/200418iconanimaux.jpg",
+    "upgrades":{
+      "upgrade1": {
+        "title": "Mutation",
+        "upgradeValue": "1.5",
+        "upgradeType": "x",
+        "description": "New species can be infected",
+        "price": "0",
+        "unlockAt":"10",
+        "bought": false,
+        "value": "1"
+      },
+      "upgrade2": {
+        "title": "Mutation",
+        "upgradeValue": "1.5",
+        "upgradeType": "x",
+        "description": "New species can be infected",
+        "price": "0",
+        "unlockAt":"20",
+        "bought": false,
+        "value": "2"
+      },
+      "upgrade3": {
+        "title": "Mutation",
+        "upgradeValue": "2",
+        "upgradeType": "x",
+        "description": "New species can be infected",
+        "price": "0",
+        "unlockAt":"30",
+        "bought": false,
+        "value": "2"
+      }
+    },
+    "value": "5"
+  },
+  "autoclicker6": {
+    "title": "Horde",
+    "description": "A horde of zombies killing a lot of people",
+    "price": "300",
+    "incrementedPrice": "300",
+    "clickValue": "2",
+    "totalClickValue": "0",
+    "number": "0",
+    "image": "https://img15.hostingpics.net/pics/387421iconhorde.jpg",
+    "upgrades":{
+      "upgrade1": {
+        "title": "Leader",
+        "upgradeValue": "2",
+        "upgradeType": "x",
+        "description": "Double the power of the horde",
+        "price": "0",
+        "unlockAt":"5",
+        "bought": false,
+        "value": "1"
+      }
+    },
+    "value": "6"
   }
 }

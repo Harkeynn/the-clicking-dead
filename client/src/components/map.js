@@ -71,7 +71,7 @@ zombiesInvasion(continent){
             percentOpacitySAmerica = thisPercent
             break
         default :
-          console.log("ERROR")
+          console.log("LOADING CONTINENT")
     }
 
     this.props.continentName(continents[nContinent][0])
@@ -97,12 +97,13 @@ zombiesInvasion(continent){
         this.zombiesInvasion(nContinent)
     }
 
-    console.log("NORTH AMERICA : " + percentOpacityNorthAmerica)
-
     return(
         <div className="mapAll">
-            <p className="infoMap">Zombies are invaded {continentInvaded} at {nbZombiesContinent}%</p>
+          <div className="infoMap">
+            <p className="infoMap">Zombies are invaded {continentInvaded} at {nbZombiesContinent < 0 ? "0" : nbZombiesContinent}%</p>
             <p className="infoMap">{humanAttack}</p>
+          </div>
+
             <div id="worldMap">
                 <div><img src={mappAll} alt="All" /></div>
                 <div id="southAmerica" style={{opacity : percentOpacitySAmerica}} className="map"><img src={mappSouthAmeria} alt="South America" /></div>
@@ -119,3 +120,4 @@ zombiesInvasion(continent){
 }
 
 export default Map
+export {continentInvaded, nbZombiesContinent}

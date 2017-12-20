@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Modal from 'react-modal'
+import { findIndex, filter } from 'lodash';
 
 const customStyles = {
 	overlay: {
@@ -24,24 +25,65 @@ const customStyles = {
 	},
 }
 
+let player;
+let playerIdx;
+
 class Leaderboard extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
       modalIsOpen: false,
+			dataUsers: ""
     }
     this.openModal = this.openModal.bind(this)
     this.closeModal = this.closeModal.bind(this)
   }
 
-  openModal() {
-    this.setState({modalIsOpen: true})
-  }
+	componentDidMount(){
+		fetch('http://localhost:1973/accounts/')
+		.then((res) => {
+			return res.json()
+		})
+		.then(jsonData => {
+			this.setState ({
+				dataUsers : jsonData,
+			})
+		})
+	}
 
-  closeModal() {
-    this.setState({modalIsOpen: false})
-  }
+  openModal() { this.setState({modalIsOpen: true}) }
+  closeModal() { this.setState({modalIsOpen: false}) }
+
+
+	getLeaderboard() {
+		let scores = []
+		let indexScores = []
+		let topPlayers = []
+
+		for(let i  = 0; i < this.state.dataUsers.length; i++) { // Get all scores
+			scores.push(this.state.dataUsers[i].score)
+		}
+
+		scores.sort( (a,b) => b-a ) // Sort scores
+		let scoresSliced = scores.slice(0, 10) // Keep 10 first scores
+
+		for(let i = 0; i < scoresSliced.length; i++) { // Get index of 10 best users
+			indexScores.push(findIndex(this.state.dataUsers, ["score", scoresSliced[i]]))
+			scoresSliced.splice(i, 1)
+			topPlayers.push(this.state.dataUsers[indexScores[i]])
+			indexScores = []
+			i--
+		}
+
+		if(findIndex(topPlayers, ["id", this.props.userId]) === -1) { // IF user is not in the leaderboard, get his place
+			player = filter(this.state.dataUsers, ["id", this.props.userId])
+			playerIdx = scores.indexOf(player[0].score)
+		}
+
+		return topPlayers;
+	}
+
 
   render() {
     return (
@@ -54,32 +96,32 @@ class Leaderboard extends Component {
 					shouldCloseOnOverlayClick={false}
 					contentLabel="Login"
 				>
-					<div class="modalContent" id="popupLeaderboard">
-					<a class="closeModal" onClick={this.closeModal}></a>
+					<div className="modalContent" id="popupLeaderboard">
+					<a className="closeModal" onClick={this.closeModal}></a>
 						<div className="modalHeader">
 							<h2>Login</h2>
 						</div>
 
 						<div className="modalBody">
 
-              <ul>
-                <li><p class="pseudo">Toto</p> <p>741 852</p></li>
-                <li><p class="pseudo">Tigrou</p> <p>887 412</p></li>
-                <li><p class="pseudo">Winnie</p> <p>875 652</p></li>
-                <li><p class="pseudo">Porcinet</p> <p>654 213</p></li>
-                <li><p class="pseudo">Coco</p> <p>612 741</p></li>
-                <li><p class="pseudo">Bourriquet</p> <p>592 471</p></li>
-                <li><p class="pseudo">Lumpy</p> <p>423 541</p></li>
-                <li><p class="pseudo">Buster</p> <p>201 412</p></li>
-                <li><p class="pseudo">Alpha</p> <p>45 478</p></li>
-                <li><p class="pseudo">Omega</p> <p>1 257</p></li>
-                <li id="player"><p class="pseudo">Username</p> <p>63</p></li>
-              </ul>
-              
+							  {this.state.dataUsers && this.props.userId > 0 ? <ul>
+
+									{this.getLeaderboard().map((val, i) => {
+										return (<li key={i} id={val.id === this.props.userId ? "player" : null }>
+											<p className="pseudo">{val.nickname}</p> <p>{val.score}</p>
+										</li> )
+							 		})}
+
+									{findIndex(this.getLeaderboard(), ["id", this.props.userId]) === -1 ? <li id="player" className="notBest">
+										<span>{playerIdx + 1}.</span><p className="pseudo">{player[0].nickname}</p> <p>{player[0].score}</p>
+									</li> : null }
+
+								</ul> : null }
+
 						</div>
 					</div>
 
-							
+
 				</Modal>
 			</div>
     )

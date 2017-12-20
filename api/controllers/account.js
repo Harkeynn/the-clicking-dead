@@ -15,6 +15,14 @@ function indexOne(req, res) {
     })
 }
 
+function indexOneWithId(req, res) {
+    Account.findOne({ where: {id: req.params.id} })
+    .then(account => {
+        res.json(account)
+        res.end()
+    })
+}
+
 function create(req, res) {
     var body = null
     var dataBuffers = []
@@ -32,4 +40,4 @@ function create(req, res) {
     })
 }
 
-module.exports = { index, indexOne, create }
+module.exports = { index, indexOne, indexOneWithId, create }

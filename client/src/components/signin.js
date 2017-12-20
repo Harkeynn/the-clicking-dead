@@ -100,7 +100,7 @@ class Signin extends Component {
 		catch(err){
 			alert(err)
 		}
-		
+
 	}
 
 	render() {
@@ -116,7 +116,7 @@ class Signin extends Component {
 					shouldCloseOnOverlayClick={false}
 					contentLabel="Signin"
 				>
-					<div class="modalContent">
+					<div className="modalContent">
 
 						<div className="modalHeader">
 							<h2>Sign in</h2>
@@ -125,34 +125,34 @@ class Signin extends Component {
 						<div className="modalBody">
 
 							<form onSubmit={this.handleSubmit}>
-								<input 
+								<input
 									id="mail"
 									placeholder="mail"
 									type="email"
 									className="validate"
 									value={this.state.mail}
-									onChange={this.handleEmailChange} 
+									onChange={this.handleEmailChange}
 								/>
 								<br />
-								<input 
+								<input
 									id="nickname"
 									placeholder="username"
 									type="text"
 									className="validate"
 									value={this.state.nickname}
-									onChange={this.handleNicknameChange} 
+									onChange={this.handleNicknameChange}
 								/>
 								<br />
-								<input 
+								<input
 									id="pass"
 									placeholder="password"
 									type="password"
 									className="validate"
 									value={this.state.password}
-									onChange={this.handlePasswordChange} 
+									onChange={this.handlePasswordChange}
 								/>
 								<br /><br/>
-								<input 
+								<input
 									id="confirm"
 									placeholder="confirm password"
 									type="password"
@@ -161,7 +161,7 @@ class Signin extends Component {
 									onChange={this.handlePasswordVChange}
 								/>
 								<br />
-								
+
 								<button type="submit">Sign in</button>
 							</form>
 							<br/>
@@ -169,7 +169,7 @@ class Signin extends Component {
 						</div>
 					</div>
 
-							
+
 				</Modal>
 			</div>
 

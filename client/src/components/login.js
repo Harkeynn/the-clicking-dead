@@ -12,7 +12,7 @@ const customStyles = {
 		left: 0,
 		right: 0,
 		bottom: 0,
-		backgroundColor: 'rgba(0, 0, 0, 0.5)'
+		backgroundColor: 'rgba(0, 0, 0, 0.5)',
 	},
 	content: {
 		top: '50%',
@@ -24,7 +24,7 @@ const customStyles = {
 		transform: 'translate(-50%, -50%)',
 		padding: '0px',
 		border: 'none',
-		boxShadow: '0 0 10px black'
+		boxShadow: '0 0 10px black',
 	},
 }
 
@@ -51,20 +51,16 @@ class Login extends Component {
     }
 
 	testModal() {
-		console.log("TESSST MODAL");
 		let result = true;
         fetch('http://localhost:1973/user')
             .then((res) => {
                 return res.json()
             })
             .then(jsonData => {
-                console.log("result " + jsonData.shouldModalBeOpened);
                 result = jsonData.shouldModalBeOpened;
                 this.setState({ modalIsOpen: result })
 
             });
-
-        console.log("state before setstate " + result);
 	}
 
 	closeModal() {
@@ -76,9 +72,6 @@ class Login extends Component {
 		})
 		.then(jsonData => {
 			let userid = jsonData.userid;
-			console.log("result " + userid);
-
-
 		});
 	}
 
@@ -93,38 +86,7 @@ class Login extends Component {
 		})
 	}
     handleSubmit = (e) => {
-		// e.preventDefault()
-		// fetch(`http://localhost:1973/game`, {
-		// 	mode: 'cors',
-		// 	method: 'POST',
-		// 	headers: {
-		// 		'Access-Control-Allow-Origin': '*',
-		// 		'Content-Type': 'application/json'
-		// 	},
-		// 	body: {
-		// 		"username": this.state.username,
-		// 		"password": this.state.password
-		// 	}
-		// })
-		// .then((res) => {
-		// 	console.log('MAXXX : ' + res);
-    //   return res.json()
-    // })
-    // .then(jsonData => {
-		// 	if(jsonData === null) throw new Error("This account doesn't exist !!")
-		// 	if(passwordHash.verify(this.state.password, jsonData.password)){
-		// 		this.closeModal()
-		// 	}else{
-		// 		throw new Error("Bad nick/pw")
-		// 	}
-		// })
-		// .catch(err => {
-		// 	console.log(err)
-		// })
 
-        console.log("openModal");
-
-        console.log(this.testModal());
 
 
         e.preventDefault()
@@ -152,7 +114,7 @@ class Login extends Component {
 	render() {
 		return (
 			<div id="modal">
-				<a data-target="modal1" className="btn modal-trigger" onClick={this.openModal}>Log Out</a>
+				<a data-target="modal1" className="btn modal-trigger" onClick={this.openModal}>LogOut</a>
 				<Modal
 					isOpen={this.state.modalIsOpen}
 					onRequestClose={this.closeModal}
@@ -160,9 +122,8 @@ class Login extends Component {
 					shouldCloseOnOverlayClick={false}
 					contentLabel="Login"
 				>
-					
-					<div class="modalContent">
-					<a class="closeModal" onClick={this.closeModal}></a>
+
+					<div className="modalContent">
 						<div className="modalHeader">
 							<h2>Login</h2>
 						</div>
@@ -170,25 +131,25 @@ class Login extends Component {
 						<div className="modalBody">
 
 							<form onSubmit={this.handleSubmit}>
-								<input 
+								<input
 									id="nickname"
 									placeholder="Username"
 									type="text"
 									className="validate"
 									value={this.state.nickname}
-									onChange={this.handleNicknameChange} 
+									onChange={this.handleNicknameChange}
 								/>
 								<br />
-								<input 
+								<input
 									id="pass"
 									placeholder="Password"
 									type="password"
 									className="validate"
 									value={this.state.password}
-									onChange={this.handlePasswordChange} 
+									onChange={this.handlePasswordChange}
 								/>
 								<br />
-								
+
 								<button type="submit" name="action">Login</button>
 							</form>
 							<br/>
@@ -196,13 +157,13 @@ class Login extends Component {
 						</div>
 					</div>
 
-							
+
 				</Modal>
 			</div>
-		
 
 
-			
+
+
 		)
 	}
 }
