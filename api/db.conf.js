@@ -1,7 +1,7 @@
 const databaseConf = {
     database: "clickingdeadv2",
     user: "root",
-    password: "",
+    password: "root",
     host: "localhost",
     dialect: "mysql"
 };
