@@ -17,8 +17,12 @@ import '../css/style.css'
 import { Scrollbars } from 'react-custom-scrollbars';
 import { Container, Row, Col, Nav, NavItem, NavLink } from 'reactstrap'
 import { Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
+import Modal from 'react-modal'
 //IMAGES
 import logo from '../img/design/logo.png'
+import win from '../img/design/win.png'
+import lose from '../img/design/lose.png'
+import bg from '../img/design/background.jpg'
 import { setInterval } from 'timers';
 
 
@@ -27,7 +31,34 @@ const riposte = [
   ["Les humains attaquent", 100],
   ["Vaccin", 200]
 ]
-let randomAttack;
+let randomAttack
+let imgEnd
+
+const customStyles = {
+	overlay: {
+		position: 'fixed',
+		top: 0,
+		left: 0,
+		right: 0,
+		bottom: 0,
+		background: '#222325 url('+bg+') no-repeat fixed center/cover',
+    animationDuration: '3s',
+		animationFillMode: 'both',
+		animationName: 'fadeIn'
+	},
+	content: {
+		top: '40%',
+		left: '50%',
+		right: 'auto',
+		bottom: 'auto',
+		marginRight: '-50%',
+		width: '500px',
+		transform: 'translate(-50%, -50%)',
+		padding: '0px',
+		border: 'none',
+    backgroundColor: 'transparent'
+	},
+}
 
 class Game extends Component {
 
@@ -35,13 +66,14 @@ class Game extends Component {
     super(props)
     this.state = {
       zombies: 0,
-      humans: 7000000000,
+      humans: 7000,
       autoClickTotal: 0,
       score: 0,
       areFighting: false,
       userId: 0,
       username : "",
       achievements : "",
+      winLose: false,
     }
   }
 
@@ -90,6 +122,7 @@ class Game extends Component {
 
   componentWillUnmount() {
     clearInterval(this.timer)
+    clearInterval(this.humansTimer)
   }
 
   saveUserStats(){
@@ -136,7 +169,7 @@ class Game extends Component {
   }
 
   getScore = () => {
-    var score = this.state.zombies*0.001
+    var score = this.state.zombies*0.1
     Object.keys(JSONAutoclickers).map((autoclicker) => {
       score += (+JSONAutoclickers[autoclicker]["number"]*(+JSONAutoclickers[autoclicker]["value"]*10))
       Object.keys(JSONAutoclickers[autoclicker]["upgrades"]).map((upgrade) => {
@@ -146,8 +179,9 @@ class Game extends Component {
       })
     })
     this.setState({
-      score: score
+      score: Math.round(score)
     })
+    console.log(this.state.score)
   }
 
   //Adds the total of zombies/sec to zombies every 0.5 seconds and update the page title
@@ -164,13 +198,11 @@ class Game extends Component {
 
   continentName = (nContinent) => {
     nameContinent = nContinent
-		console.log(nContinent)
 	}
 
   humanFighting(interval) { // Riposte des humains
 
     this.setState({ areFighting: true, })
-
     let destroyZombies = 1;
 
     this.humansTimer = setInterval(() => {
@@ -188,19 +220,31 @@ class Game extends Component {
       if(1 === Math.floor(Math.random()*30)) {
         randomAttack = Math.floor(Math.random()*2);
         destroyZombies = riposte[randomAttack][1];
-        console.log("ATTAQUE : " + randomAttack)
       }
+
+      clearInterval(this.humansTimer);
 
       this.setState({
         zombies: Math.floor(this.state.zombies) - destroyZombies
       })
     }, interval)
 
+    clearInterval(this.humansTimer);
   }
 
-
+  winLose() {
+    this.state.humans <= 0 || this.state.zombies < 0 ? this.setState({ winLose: true, }) : null
+    if(this.state.humans <= 0){
+      imgEnd = win
+    }
+    else if (this.state.zombies < 0){
+      imgEnd = lose
+    }
+  }
 
   render() {
+
+    !this.state.winLose ? this.winLose() : null
 
     let zombiesTop = format(Math.floor(this.state.zombies))
     document.title = zombiesTop < 0 ? "You lost - The Clicking Dead" : zombiesTop + " zombies - The Clicking Dead"
@@ -212,12 +256,29 @@ class Game extends Component {
       <Tooltip id="tooltip">{humansAll}</Tooltip>
     );
 
-    console.log("zombies : " + this.state.zombies)
-    console.log("autoclick : " + this.state.autoClickTotal)
-
-    if(!this.state.areFighting && zombiesInt === 100){ this.humanFighting(1000) } // Humans are fighting back
+    if(!this.state.areFighting && zombiesInt === 100 && !this.state.winLose) { // Humans are fighting back
+      clearInterval(this.humansTimer)
+      this.humanFighting(1000)
+    }
 
     return ( <div>
+      <div id="modal">
+				<Modal
+					isOpen={this.state.winLose}
+					onRequestClose={this.closeModal}
+					style={customStyles}
+					shouldCloseOnOverlayClick={false}
+					contentLabel="Login"
+				>
+
+            <img src={imgEnd}/>
+
+
+
+				</Modal>
+			</div>
+
+
       {!this.state.userId || this.state.userId <= 0 ? <div>
         <Login/>
       </div> : <div>
@@ -302,6 +363,8 @@ class Game extends Component {
             data={this.state.achievements}
             iduser = {this.state.userId}
             click={this.state.zombies}
+            randomAttack = {randomAttack}
+            autoclicker={this.state.autoClickTotal}
           />
         </div>
       </div> }

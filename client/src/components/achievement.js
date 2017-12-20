@@ -38,8 +38,25 @@ class Achievement extends Component {
       this.setState({ isLoaded: true })
       totalAchievements = []
       achievementUser = filter(this.state.savedAchievement, ["iduser", +this.props.iduser]) // Récupérer les objets correspondants à l'user uniquement
+
+      let arr = [];
+      let newArr = [];
+
+      for(let i = 0; i < achievementUser.length; i++) { // Get all achievements creation date
+          let date = achievementUser[i].createdAt
+          date = date.replace(/[-\. :T]/g, "").replace(/(000Z)/g, "")
+          arr.push([date, i])
+      }
+
+      function sortDate(a, b) { return (a[0] > b[0]) ? 1 : -1; }
+      arr.sort(sortDate) // Order from older to most achievements user
+
+      for(let y = 0; y < arr.length; y++) { // Get achievements index in the right order
+        newArr.push(arr[y][1])
+      }
+
       for (let i = 0; i < achievementUser.length; i++) {
-        totalAchievements.push(achievementUser[i].idachievement) // Récupérer les ID des achievements de l'user
+        totalAchievements.push(achievementUser[newArr[i]].idachievement) // Récupérer les ID des achievements de l'user
       }
     }
 
@@ -65,7 +82,7 @@ class Achievement extends Component {
 
   fillTotalAchievement() { // Débloquer les achievements
 
-  //NUMBER OF ZOMBIES
+  // NUMBER OF ZOMBIES
     switch (this.props.click) {
       case 1 : // First Bite
         this.pushData(this.props.iduser, 1)
@@ -87,27 +104,23 @@ class Achievement extends Component {
     }
 
   //CONTINENT
-    //if (continentInvaded === "Oceania" && nbZombiesContinent >= 100) {this.pushData(this.props.iduser, 8)} //Welcome to nopeland
     this.continentInvaded("Oceania",8) // Welcome to nopeland
-    //if (continentInvaded === "Europe" && nbZombiesContinent >= 100) {this.pushData(this.props.iduser, 4)} //Zombrexit
     this.continentInvaded("Europe",4) // Zombrexit
-    //if (continentInvaded === "Asia" && nbZombiesContinent >= 100) {this.pushData(this.props.iduser, 5)} //Tentacule madness
     this.continentInvaded("Asia",5) // Tentacule madness
-    //if (continentInvaded === "North America" && nbZombiesContinent >= 100) {this.pushData(this.props.iduser, 6)} //Fast food
-    this.continentInvaded("North America",6)
-    //if (continentInvaded === "Africa" && nbZombiesContinent >= 100) {this.pushData(this.props.iduser, 7)} //No more hunger
-    this.continentInvaded("Africa",7)
-    //if (continentInvaded === "South America" && nbZombiesContinent >= 100) {this.pushData(this.props.iduser, 9)} //The wall is broken
-    this.continentInvaded("South America",9)
-  //OTHER
-    if (nbZombiesContinent >= 100) {this.pushData(this.props.iduser, 2)} //One for all
-  //AUTOCLICKER
+    this.continentInvaded("North America",6) // Fast food
+    this.continentInvaded("Africa",7) // No more hunger
+    this.continentInvaded("South America",9) // The wall is broken
 
+  //OTHER
+    if (nbZombiesContinent >= 100) {this.pushData(this.props.iduser, 2)} // One for all
+    if (this.props.randomAttack) {this.pushData(this.props.iduser, 13)} // Karma is a bitch
+    if (this.props.autoclicker > 0) {this.pushData(this.props.iduser, 14)} // Karma is a bitch
+  //AUTOCLICKER
     visibleAchievements = totalAchievements.slice(-4);
     this.filterData()
   }
 
-  continentInvaded(continent, idAchievement) {
+  continentInvaded(continent, idAchievement) { // Continent achievements
     if (continentInvaded === continent && nbZombiesContinent >= 100) {this.pushData(this.props.iduser, idAchievement)}
   }
 
@@ -119,22 +132,9 @@ class Achievement extends Component {
     }
   }
 
-
-test() {
-  let arr = [];
-  for(let i = 0; i < achievementUser.length; i++) {
-      let date = achievementUser[i].createdAt
-    //  let newArr =
-      arr.push(date.replace(/[-: .]/g, "").replace(/000Z/g, "") + i)
-  }
-console.log(arr)
-}
-
-
   render() {
 
     this.state.savedAchievement ? this.loadAchievements() : null // Load les achievements de l'user
-    this.state.savedAchievement ? this.test() : null
 
     return (
       <Row className="no-gutters" id="achievementsZone">
