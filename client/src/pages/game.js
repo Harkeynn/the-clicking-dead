@@ -11,6 +11,7 @@ import Sauvegarde from '../components/sauvegarde'
 import Achievement from '../components/achievement'
 import Map from '../components/map'
 import Leaderboard from '../components/leaderboard'
+import SaveStats from '../api/saveStats'
 //STYLES
 import '../css/style.css'
 import { Scrollbars } from 'react-custom-scrollbars';
@@ -18,6 +19,7 @@ import { Container, Row, Col, Nav, NavItem, NavLink } from 'reactstrap'
 import { Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 //IMAGES
 import logo from '../img/design/logo.png'
+import { setInterval } from 'timers';
 
 
 let nameContinent
@@ -42,12 +44,21 @@ class Game extends Component {
 
   //Sets the page title on initialisation
   componentDidMount() {
+    setInterval(() => this.saveUserStats(), 10000)
     document.title = format(Math.floor(this.state.zombies)) + " zombies - The Clicking Dead"
     this.getScore()
   }
 
   componentWillUnmount() {
     clearInterval(this.timer)
+  }
+
+  saveUserStats(){
+    SaveStats.save(
+      this.state.zombies,
+      this.state.humans,
+      this.state.score
+    );
   }
 
   //Updates zombies and page title when clicking on the <Incremement /> button
@@ -244,32 +255,6 @@ class Game extends Component {
           </Row>
         </div>
       </div>
-
-        /*<div className="container">
-          <h1>The Clicking Dead</h1>
-          <Login/>
-          <Profile/>
-          <Sauvegarde score={this.state.score}/>
-          <Link to="/leaderboard">Leaderboard</Link>
-          <Increment
-            handleZombieIncrement={this.handleZombIncr}
-            zombies={format(Math.floor(this.state.zombies))}
-            zps={format(this.state.autoClickTotal)}
-          />
-          {Object.keys(JSONAutoclickers).map((autoclicker) => {
-            return (
-              <Autoclicker
-              zombies={this.state.zombies}
-              handleAutoClick={this.handleAutoClick}
-              autoclicker={autoclicker}
-              zps={this.state.autoClickTotal}
-              handleUpgrade={this.handleAutoClick}
-              key={autoclicker}
-            />
-            )
-          })}
-        </div>*/
-
     )
   }
 }
