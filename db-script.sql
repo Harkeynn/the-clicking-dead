@@ -17,21 +17,10 @@ CREATE DATABASE IF NOT EXISTS `clickingdeadv2` /*!40100 DEFAULT CHARACTER SET ut
 USE `clickingdeadv2`;
 
 
--- Export de données de la table clickingdeadv2.accountachievement : ~4 rows (environ)
-/*!40000 ALTER TABLE `accountachievement` DISABLE KEYS */;
-INSERT INTO `accountachievement` (`iduser`, `idachievement`, `createdAt`, `updatedAt`) VALUES
-	(1, 1, '2017-12-20 12:34:48', '2017-12-20 12:34:48'),
-	(1, 2, '2017-12-20 12:35:03', '2017-12-20 12:35:03'),
-	(1, 8, '2017-12-20 12:35:03', '2017-12-20 12:35:03'),
-	(1, 19, '2017-12-20 12:34:51', '2017-12-20 12:34:51');
-/*!40000 ALTER TABLE `accountachievement` ENABLE KEYS */;
-
 -- Export de la structure de la table clickingdeadv2. accountautoclicker
 
 
--- Export de données de la table clickingdeadv2.accountautoclicker : ~0 rows (environ)
-/*!40000 ALTER TABLE `accountautoclicker` DISABLE KEYS */;
-/*!40000 ALTER TABLE `accountautoclicker` ENABLE KEYS */;
+
 
 -- Export de la structure de la table clickingdeadv2. accounts
 CREATE TABLE IF NOT EXISTS `accounts` (
@@ -152,6 +141,19 @@ INSERT INTO `leaderboards` (`id`, `nickname`, `score`, `createdAt`, `updatedAt`)
 	(1, 'Nereyde', 888888888, '2017-12-08 14:57:53', '2017-12-08 14:57:53'),
 	(2, 'Jeremy', 999999999, '2017-12-08 14:57:53', '2017-12-08 14:57:53');
 /*!40000 ALTER TABLE `leaderboards` ENABLE KEYS */;
+-- Export de données de la table clickingdeadv2.accountautoclicker : ~0 rows (environ)
+/*!40000 ALTER TABLE `accountautoclicker` DISABLE KEYS */;
+/*!40000 ALTER TABLE `accountautoclicker` ENABLE KEYS */;
+
+
+-- Export de données de la table clickingdeadv2.accountachievement : ~4 rows (environ)
+/*!40000 ALTER TABLE `accountachievement` DISABLE KEYS */;
+INSERT INTO `accountachievement` (`iduser`, `idachievement`, `createdAt`, `updatedAt`) VALUES
+	(1, 1, '2017-12-20 12:34:48', '2017-12-20 12:34:48'),
+	(1, 2, '2017-12-20 12:35:03', '2017-12-20 12:35:03'),
+	(1, 8, '2017-12-20 12:35:03', '2017-12-20 12:35:03'),
+	(1, 19, '2017-12-20 12:34:51', '2017-12-20 12:34:51');
+/*!40000 ALTER TABLE `accountachievement` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
