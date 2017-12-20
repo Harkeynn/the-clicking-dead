@@ -107,7 +107,12 @@ module.exports = function(app, passport) {
             return accountController.saveStats(req, res);
         })
 
-
+    // =====================================
+    // UPDATE PASSWORD =====================
+    // =====================================
+    app.post('/updatepassword', function(req, res) {
+        return accountController.updatePassword(req, res);
+    })
 
     // =====================================
     // SIGNUP ==============================
