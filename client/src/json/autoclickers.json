@@ -14,7 +14,7 @@
         "upgradeValue": "2",
         "upgradeType": "x",
         "description": "Double the power of infection.",
-        "price": "25",
+        "price": "0",
         "unlockAt":"5",
         "bought": false,
         "value": "1"
@@ -24,7 +24,7 @@
         "upgradeValue": "1",
         "upgradeType": "+",
         "description": "Gain one more zombie per second.",
-        "price": "40",
+        "price": "0",
         "unlockAt":"10",
         "bought": false,
         "value": "2"
@@ -34,7 +34,7 @@
         "upgradeValue": "2",
         "upgradeType": "+",
         "description": "Good vision, better power.",
-        "price": "80",
+        "price": "0",
         "unlockAt":"20",
         "bought": false,
         "value": "3"
@@ -80,7 +80,7 @@
         "upgradeValue": "2",
         "upgradeType": "+",
         "description": "Gain two more zombies per second.",
-        "price": "50",
+        "price": "0",
         "unlockAt":"5",
         "bought": false,
         "value": "1"
@@ -90,7 +90,7 @@
         "upgradeValue": "2",
         "upgradeType": "x",
         "description": "Double the skill of your climbing zombies.",
-        "price": "150",
+        "price": "0",
         "unlockAt":"10",
         "bought": false,
         "value": "2"
@@ -113,7 +113,7 @@
         "upgradeValue": "2",
         "upgradeType": "x",
         "description": "Double the speed of your swimming zombies.",
-        "price": "200",
+        "price": "0",
         "unlockAt":"10",
         "bought": false,
         "value": "1"
@@ -136,7 +136,7 @@
         "upgradeValue": "5",
         "upgradeType": "+",
         "description": "Gain five more zombies per second.",
-        "price": "250",
+        "price": "0",
         "unlockAt":"10",
         "bought": false,
         "value": "1"
@@ -146,7 +146,7 @@
         "upgradeValue": "10",
         "upgradeType": "+",
         "description": "Gain ten more zombies per second.",
-        "price": "400",
+        "price": "0",
         "unlockAt":"25",
         "bought": false,
         "value": "2"
@@ -169,7 +169,7 @@
         "upgradeValue": "1.5",
         "upgradeType": "x",
         "description": "New species can be infected.",
-        "price": "300",
+        "price": "0",
         "unlockAt":"10",
         "bought": false,
         "value": "1"
@@ -179,7 +179,7 @@
         "upgradeValue": "5",
         "upgradeType": "+",
         "description": "Infect birds to spread the virus.",
-        "price": "500",
+        "price": "0",
         "unlockAt":"20",
         "bought": false,
         "value": "2"
@@ -189,7 +189,7 @@
         "upgradeValue": "2",
         "upgradeType": "x",
         "description": "Insects are spreading the virus.",
-        "price": "1000",
+        "price": "0",
         "unlockAt":"30",
         "bought": false,
         "value": "3"
@@ -212,7 +212,7 @@
         "upgradeValue": "1",
         "upgradeType": "+",
         "description": "Your hordes are less likely to get trapped by humans.",
-        "price": "500",
+        "price": "0",
         "unlockAt":"5",
         "bought": false,
         "value": "1"
@@ -222,7 +222,7 @@
         "upgradeValue": "2",
         "upgradeType": "x",
         "description": "Double the power of the hordes.",
-        "price": "1500",
+        "price": "0",
         "unlockAt":"15",
         "bought": false,
         "value": "2"

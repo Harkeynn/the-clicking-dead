@@ -205,16 +205,17 @@ class Game extends Component {
     this.humansTimer = setInterval(() => {
 
       if(this.state.zombies < 100) {
-        destroyZombies = 0.5
+        destroyZombies = 1
       }
 
       if(this.state.zombies > 100) {
-        destroyZombies = 1
-        let test = Math.floor(Math.random()*30)
-        if(1 === test) {
-          randomAttack = Math.floor(Math.random()*4)
-          destroyZombies = riposte[randomAttack][1]
-        }
+        destroyZombies = 2
+      }
+
+      let test = Math.floor(Math.random()*10)
+      if(1 === test) {
+        randomAttack = Math.floor(Math.random()*4)
+        destroyZombies = riposte[randomAttack][1]
       }
 
       if(this.state.zombies > 500) {
@@ -253,7 +254,7 @@ class Game extends Component {
       <Tooltip id="tooltip">{humansAll}</Tooltip>
     )
 
-    if(!this.state.areFighting && zombiesInt === 10 && !this.state.winLose) { // Humans are fighting back
+    if(!this.state.areFighting && zombiesInt === 50 && !this.state.winLose) { // Humans are fighting back
       this.humanFighting()
     }
 
@@ -262,7 +263,6 @@ class Game extends Component {
     let attack = ""
     if(humanAttack !== null) {
       attack = humanAttack + ", you have lost " + lostZombies + " zombies"
-       setTimeout(function(){ attack = "" }, 3000)
     }
 
     if(!this.state.winLose){
