@@ -13,7 +13,7 @@
         "title": "Steroïdes",
         "upgradeValue": "2",
         "upgradeType": "x",
-        "description": "Double the power of infection.",
+        "description": "Rise the power of infection.",
         "price": "0",
         "unlockAt":"5",
         "bought": false,
@@ -45,8 +45,8 @@
   "autoclicker2": {
     "title": "Discreet Zombies",
     "description": "Create discreet zombies that spread the virus for you",
-    "price": "30",
-    "incrementedPrice": "30",
+    "price": "20",
+    "incrementedPrice": "20",
     "clickValue": "0.3",
     "totalClickValue": "0",
     "number": "0",
@@ -88,7 +88,7 @@
       "upgrade2": {
         "title": "Spider-Man",
         "upgradeValue": "2",
-        "upgradeType": "x",
+        "upgradeType": "+",
         "description": "Double the skill of your climbing zombies.",
         "price": "0",
         "unlockAt":"10",
@@ -111,7 +111,7 @@
       "upgrade1": {
         "title": "Butterfly",
         "upgradeValue": "2",
-        "upgradeType": "x",
+        "upgradeType": "+",
         "description": "Double the speed of your swimming zombies.",
         "price": "0",
         "unlockAt":"10",

@@ -14,7 +14,7 @@ class Autoclicker extends Component {
       isBuying: false,
     }
   }
-  
+
 
 
   //set price to base price * 1.15^N (N=number of autoclicker(s))
@@ -53,8 +53,8 @@ class Autoclicker extends Component {
         this.setState({ isBuying: !isBuying, })
         break
       case 'x':
-        autoclicker["clickValue"] = autoclicker["clickValue"] * upgrade["upgradeValue"]
-        autoclicker["totalClickValue"] = autoclicker["clickValue"] * autoclicker["number"]
+        autoclicker["clickValue"] = +autoclicker["clickValue"] * +upgrade["upgradeValue"]
+        autoclicker["totalClickValue"] = +autoclicker["clickValue"] * autoclicker["number"]
         this.setState({ isBuying: !isBuying, })
         break
       default:

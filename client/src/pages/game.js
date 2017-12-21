@@ -190,7 +190,6 @@ class Game extends Component {
         zombies: Math.round((this.state.zombies + parseFloat(this.state.autoClickTotal) / 2) * 100) / 100,
         humans: Math.round((this.state.humans - parseFloat(this.state.autoClickTotal) / 2) * 100) / 100
       })
-      document.title = format(Math.floor(this.state.zombies)) + " zombies - The Clicking Dead"
     }, 500)
   }
 
@@ -267,7 +266,6 @@ class Game extends Component {
 
     if(!this.state.winLose){
       this.winLose()
-      console.log("TEST")
     }
 
     return ( <div>

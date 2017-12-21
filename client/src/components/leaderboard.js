@@ -98,8 +98,6 @@ class Leaderboard extends Component {
 			}
 		}
 
-		console.log(player)
-
 		return topPlayers;
 	}
 
