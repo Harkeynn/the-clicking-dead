@@ -54,11 +54,11 @@
     "upgrades":{
       "upgrade1": {
         "title": "Slippers",
-        "upgradeValue": "0.2",
-        "upgradeType": "x",
+        "upgradeValue": "2",
+        "upgradeType": "+",
         "description": "Your zombies are even more discreet.",
         "price": "0",
-        "unlockAt":"10",
+        "unlockAt":"1",
         "bought": false,
         "value": "1"
       }
