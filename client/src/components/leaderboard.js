@@ -74,27 +74,31 @@ class Leaderboard extends Component {
 		let topPlayers = []
 
 		for(let i  = 0; i < this.state.dataUsers.length; i++) { // Get all scores
-			scores.push(this.state.dataUsers[i].score)
+			scores.push([this.state.dataUsers[i].score, i])
 		}
 
-		scores.sort( (a,b) => b-a ) // Sort scores
+		function sortDate(a, b) { return (a[0] < b[0]) ? 1 : -1; }
+		scores.sort(sortDate)
+
 
 		let scoresSliced = scores.slice(0, 10) // Keep 10 first scores
-		//console.log(scoresSliced)
 
 		for(let i = 0; i < scoresSliced.length; i++) { // Get index of 10 best users
-			indexScores.push(findIndex(this.state.dataUsers, ["score", scoresSliced[i]]))
-			scoresSliced.splice(i, 1)
-			//console.log(scoresSliced)
-			topPlayers.push(this.state.dataUsers[indexScores[i]])
-			indexScores = []
-			i--
+
+			topPlayers.push(this.state.dataUsers[scoresSliced[i][1]])
 		}
+
 
 		if(findIndex(topPlayers, ["id", this.props.userId]) === -1) { // IF user is not in the leaderboard, get his place
 			player = filter(this.state.dataUsers, ["id", this.props.userId])
-			playerIdx = scores.indexOf(player[0].score)
+			for(let i = 0; i < scores.length; i++){
+				if(scores[i][0] === player[0].score){
+					playerIdx = i
+				}
+			}
 		}
+
+		console.log(player)
 
 		return topPlayers;
 	}
